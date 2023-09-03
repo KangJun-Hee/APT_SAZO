@@ -1,7 +1,6 @@
 package com.ap4j.bma.model.repository;
 
 import com.ap4j.bma.model.entity.TalkTalk.TalkTalkReviewEntity;
-import com.ap4j.bma.model.entity.member.MemberEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

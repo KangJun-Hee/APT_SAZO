@@ -1,9 +1,11 @@
 package com.ap4j.bma.controller.map;
 
+import com.ap4j.bma.model.entity.TalkTalk.TalkTalkReviewEntity;
 import com.ap4j.bma.model.entity.apt.AptDTO;
 import com.ap4j.bma.model.entity.apt.AptRealTradeDTO;
 import com.ap4j.bma.model.entity.apt.HangJeongDongDTO;
 import com.ap4j.bma.service.apartment.ApartmentServiceImpl;
+import com.ap4j.bma.service.talktalk.ReviewService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,8 @@ import java.util.Map;
 @RequestMapping("map")
 public class MapController {
 
+    @Autowired
+    private ReviewService reviewService;
 
     @Autowired
     ApartmentServiceImpl aptServiceImpl;
@@ -55,9 +59,20 @@ public class MapController {
         return ResponseEntity.ok(responseData);
     }
     @GetMapping("/main")
-    public String getMarker() {
+    public String getMarker(HttpSession session, Model model) {
+        log.info("map main 실행");
+        log.info("login session : " + session.getAttribute("loginMember"));
+
+        List<TalkTalkReviewEntity> list = reviewService.reviewList();
+        log.info(list.toString());
+
+        //서비스에서 생성한 리스트를 list라는 이름으로 반환하겠다.
+        model.addAttribute("list", list);
+
         return "kakaoMap/markerCluster";
     }
+
+
 
 //    @GetMapping("/main")
 //    public String getOtherData(Model model) {

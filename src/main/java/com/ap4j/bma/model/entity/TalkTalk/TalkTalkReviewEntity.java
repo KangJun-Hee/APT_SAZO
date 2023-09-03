@@ -19,12 +19,12 @@ import javax.persistence.Id;
 //Entity란? Entity는 데이터베이스에 테이블과 같은 의미로 쓰이며 자바에서는 테이블을 엔티티라고 한다.
 
 
-//@NoArgsConstructor
+@NoArgsConstructor
 ////@AllArgsConstructor
 ////@Builder
 //@Getter
 //@Setter
-//@Table(name="APARTMENT_REVIEW")
+@Table(name="APARTMENT_REVIEW")
 @Entity
 @Data
 public class TalkTalkReviewEntity{
@@ -37,7 +37,7 @@ public class TalkTalkReviewEntity{
          */
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private int board_no;
+        private Integer board_no;
 
         @Column
         private String email;
@@ -45,7 +45,7 @@ public class TalkTalkReviewEntity{
         @Column
         private int id;
 
-        @Column
+        @Column(name = "CONTENT", nullable = false,length = 1000)
         private String content;
 
         @CreationTimestamp
@@ -59,14 +59,14 @@ public class TalkTalkReviewEntity{
 //        @OrderBy("id asc") // 댓글 정렬
 //        private List<Comment> comments;
 
-//        @Builder
-//        public TalkTalkReviewEntity(int board_no,String email,int id,String content,LocalDateTime create_at) {
-//                this.board_no = board_no;
-//                this.email = email;
-//                this.id = id;
-//                this.content = content;
-//                this.create_at = create_at;
-//        }
+        @Builder
+        public TalkTalkReviewEntity(int board_no,String email,int id,String content,LocalDateTime create_at) {
+                this.board_no = board_no;
+                this.email = email;
+                this.id = id;
+                this.content = content;
+                this.create_at = create_at;
+        }
 //
 //        public TalkTalkReviewDto toDTO(){
 //                return TalkTalkReviewDto.builder()
