@@ -1,31 +1,61 @@
-//@Builder
-//@AllArgsConstructor
+//package com.ap4j.bma.model.entity.TalkTalk;
+//
+//import com.ap4j.bma.model.entity.member.MemberEntity;
+//import lombok.Builder;
+//import org.hibernate.annotations.CreationTimestamp;
+//import lombok.*;
+//
+//import javax.persistence.*;
+//import java.time.LocalDateTime;
+//
+////@Builder
+////@AllArgsConstructor
 //@NoArgsConstructor
 //@Getter
 //@Table(name = "APARTMENT_REPLY")
 //@Entity
 //public class TalkTalkReplyEntity {
 //
-//@Id
-//@GeneratedValue(strategy = GenerationType.IDENTITY)
-//private Long id;
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private int reply_no;
 //
-//@Column(columnDefinition = "TEXT", nullable = false)
-//private String comment; // 댓글 내용
+//    @Column
+//    private String email;
 //
-//@Column(name = "created_date")
-//@CreatedDate
-//private String createdDate;
+//    @Column(nullable = false)
+//    private int board_no;
 //
-//@Column(name = "modified_date")
-//@LastModifiedDate
-//private String modifiedDate;
+//    @Column
+//    private String content;
 //
-//@ManyToOne
-//@JoinColumn(name = "posts_id")
-//private Posts posts;
+//    @CreationTimestamp
+//    private LocalDateTime create_at;
 //
-//@ManyToOne
-////JoinColumn(name = "user_id")
-//private User user; // 작성자
+//    @ManyToOne
+//    @JoinColumn(name = "board_no")
+//    private TalkTalkReviewEntity talkTalkReviewEntity;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "email")
+//    private MemberEntity memberEntity; // 작성자
+//
+//
+//    @Builder
+//    public TalkTalkReplyEntity(int reply_no,String email,int board_no,String content) {
+//        this.reply_no = reply_no;
+//        this.email = email;
+//        this.board_no = board_no;
+//        this.content = content;
+//    }
+//
+//    public TalkTalkReplyDto toDTO(){
+//        return TalkTalkReplyDto.builder()
+//                .reply_no(reply_no)
+//                .email(email)
+//                .board_no(board_no)
+//                .content(content)
+//                .create_at(create_at)
+//                .build();
+//    }
 //}

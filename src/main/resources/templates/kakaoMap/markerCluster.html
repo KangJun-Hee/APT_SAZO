@@ -262,37 +262,40 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="name-container">
-                                                    <input type="text" maxlength="16" class="input name"
-                                                           placeholder="이름을 입력해주세요" value="kjh">
-                                                    <span class="caption">이름(변경가능)</span>
-                                                </div>
-                                                <div class="content-container">
+                                                <form action="/board/writepro" method="post">
+
+                                                    <div class="name-container">
+                                                        <span type="text" maxlength="16" class="input name"
+                                                              placeholder="이름을 입력해주세요" value="kjh"></span>
+                                                        <span class="caption" >이름(변경가능)</span>
+                                                    </div>
+                                                    <div class="content-container">
+                                                        <div class="add-image-input-group">
                                                         <textarea class="aPostcontent"
-                                                                  placeholder="다른 사람을 비방하거나, 타인에게 불쾌감을 유발하는 부적절한 표현, 영리 목적의 광고는 삼가해주세요!"></textarea>
-                                                    <div class="add-image-input-group">
-                                                        <div class="image-uploader _imageUploader"
-                                                             style="display: inline-block; width: 50px; height: 50px;">
-                                                            <div class="file-input-container add-image-input-container _addImageinputContainer"
-                                                                 style="line-height: 28px;">
-                                                                <form enctype="multipart/form-data" method="post"
-                                                                      id="__image_upload109_form">
-                                                                    <span class="upload"></span>
-                                                                    <input id="aimage_upload" type="file"
-                                                                           name="images" accept="image/*,.heic"
-                                                                           multiple="">
-                                                                </form>
+                                                                    name="content"
+                                                                  placeholder="다른 사람을 비방하거나, 타인에게 불쾌감을 유발하는 부적절한 표현, 영리 목적의 광고는 삼가해주세요!">
+
+                                                        </textarea>
+                                                            <div class="image-uploader _imageUploader"
+                                                                 style="display: inline-block; width: 50px; height: 50px;">
+                                                                <div class="file-input-container add-image-input-container _addImageinputContainer"
+                                                                     style="line-height: 28px;">
+
+                                                                        <span class="upload"></span>
+                                                                        <input id="aimage_upload" type="file"
+                                                                               name="images" accept="image/*,.heic"
+                                                                               multiple="">
+                                                                </div>
+                                                            </div>
+                                                            <div class="preview-group _previewGroup"
+                                                                 style="display: inline-block; width: 254px;">
                                                             </div>
                                                         </div>
-                                                        <div class="preview-group _previewGroup"
-                                                             style="display: inline-block; width: 254px;">
-                                                        </div>
                                                     </div>
-                                                </div>
-                                                <a href="#" class="btn-write" data-ga-event="review,writeBtn" style="width: 100%;  color: white;
-                                                   ">
-                                                    등록하기
-                                                </a>
+                                                    <button type="submit" class="btn-write" style="width: 100%;  color: white;" >
+                                                        등록하기
+                                                    </button>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -492,150 +495,150 @@
                                                                     </div>
                                                                     <div class="apostAndReply">
                                                                         <div class="postOnResiTell">
-                                                                            <div class="userinfo">
-                                                                                    <span class="ninkname">
+                                                                            <div th:each="review:${list}" class="userinfo">
+                                                                                    <span class="aemail" >
                                                                                         IlIIlIIllIl
                                                                                     </span>
-                                                                                <div class="acontent">
+                                                                                <div class="acontent" th:text="${review.content}">
                                                                                     보강완료했다는데 그래도 보존등기 늦어지나요? 다들 언제
                                                                                     예상하나요?
                                                                                 </div>
-                                                                                <div class="auploadDate">
+                                                                                <div class="auploadDate" >
                                                                                     2023.08.31
 
                                                                                 </div>
                                                                             </div>
 
-                                                                            <div class="areplyOnresitell">
-                                                                                <div class="css-0">
-                                                                                    <div>
-                                                                                        <div role="listitem"
-                                                                                             class="css-19sk4h4">
-                                                                                            <div
-                                                                                                    class="css-1901ou2">
-                                                                                                <div
-                                                                                                        class="arepUserInfo">
-                                                                                                    <div>
-                                                                                                            <span
-                                                                                                                    class="arepNickname">
-                                                                                                                JAIMIE
-                                                                                                            </span>
+<!--                                                                            <div class="areplyOnresitell">-->
+<!--                                                                                <div class="css-0">-->
+<!--                                                                                    <div>-->
+<!--                                                                                        <div role="listitem"-->
+<!--                                                                                             class="css-19sk4h4">-->
+<!--                                                                                            <div-->
+<!--                                                                                                    class="css-1901ou2">-->
+<!--                                                                                                <div-->
+<!--                                                                                                        class="arepUserInfo">-->
+<!--                                                                                                    <div>-->
+<!--                                                                                                            <span-->
+<!--                                                                                                                    class="arepNickname">-->
+<!--                                                                                                                JAIMIE-->
+<!--                                                                                                            </span>-->
 
-                                                                                                    </div>
-                                                                                                    <span
-                                                                                                            class="auploadDate">
-                                                                                    2023.08.31
-                                                                                                        </span>
-                                                                                                </div>
-                                                                                                <div
-                                                                                                        class="arepContentAlign">
-                                                                                                    <div
-                                                                                                            class="arepContent">
-                                                                                                        중순에서 말이랍니다.
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div
-                                                                                                    class="areplyOnReplyDiv">
-                                                                                                <a href="#"
-                                                                                                   class="areplyOnReply">
-                                                                                                    답글달기
-                                                                                                </a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="css-1x0d6yz">
-                                                                                <div class="css-xh77hs">
-                                                                                    <div class="areplyOnPostAlign">
-                                                                                        <input class="areplyOnPost"
-                                                                                               placeholder="kjh로 댓글 남기기">
+<!--                                                                                                    </div>-->
+<!--                                                                                                    <span-->
+<!--                                                                                                            class="auploadDate">-->
+<!--                                                                                    2023.08.31-->
+<!--                                                                                                        </span>-->
+<!--                                                                                                </div>-->
+<!--                                                                                                <div-->
+<!--                                                                                                        class="arepContentAlign">-->
+<!--                                                                                                    <div-->
+<!--                                                                                                            class="arepContent">-->
+<!--                                                                                                        중순에서 말이랍니다.-->
+<!--                                                                                                    </div>-->
+<!--                                                                                                </div>-->
+<!--                                                                                            </div>-->
+<!--                                                                                            <div-->
+<!--                                                                                                    class="areplyOnReplyDiv">-->
+<!--                                                                                                <a href="#"-->
+<!--                                                                                                   class="areplyOnReply">-->
+<!--                                                                                                    답글달기-->
+<!--                                                                                                </a>-->
+<!--                                                                                            </div>-->
+<!--                                                                                        </div>-->
+<!--                                                                                    </div>-->
+<!--                                                                                </div>-->
+<!--                                                                            </div>-->
+<!--                                                                            <div class="css-1x0d6yz">-->
+<!--                                                                                <div class="css-xh77hs">-->
+<!--                                                                                    <div class="areplyOnPostAlign">-->
+<!--                                                                                        <input class="areplyOnPost"-->
+<!--                                                                                               placeholder="kjh로 댓글 남기기">-->
 
-                                                                                        <button type="button"
-                                                                                                class="btn btn-primary aSummitReply">
-                                                                                            등록
-                                                                                        </button>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
+<!--                                                                                        <button type="button"-->
+<!--                                                                                                class="btn btn-primary aSummitReply">-->
+<!--                                                                                            등록-->
+<!--                                                                                        </button>-->
+<!--                                                                                    </div>-->
+<!--                                                                                </div>-->
+<!--                                                                            </div>-->
 
                                                                         </div>
 
                                                                     </div>
-                                                                    <div class="apostAndReply">
-                                                                        <div class="postOnResiTell">
-                                                                            <div class="userinfo">
-                                                                                    <span class="ninkname">
-                                                                                        IlIIlIIllIl
-                                                                                    </span>
-                                                                                <div class="acontent">
-                                                                                    보강완료했다는데 그래도 보존등기 늦어지나요? 다들 언제
-                                                                                    예상하나요?
-                                                                                </div>
-                                                                                <div class="auploadDate">
-                                                                                    2023.08.31
+<!--                                                                    <div class="apostAndReply">-->
+<!--                                                                        <div class="postOnResiTell">-->
+<!--                                                                            <div class="userinfo">-->
+<!--                                                                                    <span class="ninkname">-->
+<!--                                                                                        IlIIlIIllIl-->
+<!--                                                                                    </span>-->
+<!--                                                                                <div class="acontent">-->
+<!--                                                                                    보강완료했다는데 그래도 보존등기 늦어지나요? 다들 언제-->
+<!--                                                                                    예상하나요?-->
+<!--                                                                                </div>-->
+<!--                                                                                <div class="auploadDate">-->
+<!--                                                                                    2023.08.31-->
 
-                                                                                </div>
-                                                                            </div>
+<!--                                                                                </div>-->
+<!--                                                                            </div>-->
 
-                                                                            <div class="areplyOnresitell">
-                                                                                <div class="css-0">
-                                                                                    <div>
-                                                                                        <div role="listitem"
-                                                                                             class="css-19sk4h4">
-                                                                                            <div
-                                                                                                    class="css-1901ou2">
-                                                                                                <div
-                                                                                                        class="arepUserInfo">
-                                                                                                    <div>
-                                                                                                            <span
-                                                                                                                    class="arepNickname">
-                                                                                                                JAIMIE
-                                                                                                            </span>
+<!--                                                                            <div class="areplyOnresitell">-->
+<!--                                                                                <div class="css-0">-->
+<!--                                                                                    <div>-->
+<!--                                                                                        <div role="listitem"-->
+<!--                                                                                             class="css-19sk4h4">-->
+<!--                                                                                            <div-->
+<!--                                                                                                    class="css-1901ou2">-->
+<!--                                                                                                <div-->
+<!--                                                                                                        class="arepUserInfo">-->
+<!--                                                                                                    <div>-->
+<!--                                                                                                            <span-->
+<!--                                                                                                                    class="arepNickname">-->
+<!--                                                                                                                JAIMIE-->
+<!--                                                                                                            </span>-->
 
-                                                                                                    </div>
-                                                                                                    <span
-                                                                                                            class="auploadDate">
-                                                                                                            2023.08.31
-                                                                                                        </span>
-                                                                                                </div>
-                                                                                                <div
-                                                                                                        class="arepContentAlign">
-                                                                                                    <div
-                                                                                                            class="arepContent">
-                                                                                                        중순에서 말이랍니다.
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div
-                                                                                                    class="areplyOnReplyDiv">
-                                                                                                <a href="#"
-                                                                                                   class="areplyOnReply">
-                                                                                                    답글달기
-                                                                                                </a>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="css-1x0d6yz">
-                                                                                <div class="css-xh77hs">
-                                                                                    <div class="areplyOnPostAlign">
-                                                                                        <input class="areplyOnPost"
-                                                                                               placeholder="kjh로 댓글 남기기">
+<!--                                                                                                    </div>-->
+<!--                                                                                                    <span-->
+<!--                                                                                                            class="auploadDate">-->
+<!--                                                                                                            2023.08.31-->
+<!--                                                                                                        </span>-->
+<!--                                                                                                </div>-->
+<!--                                                                                                <div-->
+<!--                                                                                                        class="arepContentAlign">-->
+<!--                                                                                                    <div-->
+<!--                                                                                                            class="arepContent">-->
+<!--                                                                                                        중순에서 말이랍니다.-->
+<!--                                                                                                    </div>-->
+<!--                                                                                                </div>-->
+<!--                                                                                            </div>-->
+<!--                                                                                            <div-->
+<!--                                                                                                    class="areplyOnReplyDiv">-->
+<!--                                                                                                <a href="#"-->
+<!--                                                                                                   class="areplyOnReply">-->
+<!--                                                                                                    답글달기-->
+<!--                                                                                                </a>-->
+<!--                                                                                            </div>-->
+<!--                                                                                        </div>-->
+<!--                                                                                    </div>-->
+<!--                                                                                </div>-->
+<!--                                                                            </div>-->
+<!--                                                                            <div class="css-1x0d6yz">-->
+<!--                                                                                <div class="css-xh77hs">-->
+<!--                                                                                    <div class="areplyOnPostAlign">-->
+<!--                                                                                        <input class="areplyOnPost"-->
+<!--                                                                                               placeholder="kjh로 댓글 남기기">-->
 
-                                                                                        <button type="button"
-                                                                                                class="btn btn-primary aSummitReply">
-                                                                                            등록
-                                                                                        </button>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
+<!--                                                                                        <button type="button"-->
+<!--                                                                                                class="btn btn-primary aSummitReply">-->
+<!--                                                                                            등록-->
+<!--                                                                                        </button>-->
+<!--                                                                                    </div>-->
+<!--                                                                                </div>-->
+<!--                                                                            </div>-->
 
-                                                                        </div>
+<!--                                                                        </div>-->
 
-                                                                    </div>
+<!--                                                                    </div>-->
                                                                 </div>
                                                             </div>
 
