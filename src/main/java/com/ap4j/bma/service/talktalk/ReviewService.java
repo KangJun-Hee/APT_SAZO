@@ -35,7 +35,7 @@ public class ReviewService {
     }
 
 
-    public List<TalkTalkReviewDto> aptIdtoReview(Long id) {
-        return ;
-    }
+//    public List<TalkTalkReviewDto> aptIdtoReview(Long id) {
+//        return ;
+//    }
 }

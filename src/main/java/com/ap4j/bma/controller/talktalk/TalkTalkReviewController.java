@@ -72,7 +72,7 @@ public class TalkTalkReviewController {
         for (AptDTO aptDTO: aptEntity){
             aptDTO.getId();
         }
-        reviewEntity.setId(99);
+//        reviewEntity.setId(99);
 //        AptDTO aptInfo = aptServiceImpl.getAptInfoById(apartmentId);
 
 

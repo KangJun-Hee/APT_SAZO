@@ -47,6 +47,6 @@ spring:
     generate-unique-name: false
     url: jdbc:mysql://localhost:3306/pos
     username: root
-    password: 1234
+#    password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
 

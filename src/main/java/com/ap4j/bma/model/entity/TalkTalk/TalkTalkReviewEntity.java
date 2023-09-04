@@ -42,7 +42,7 @@ public class TalkTalkReviewEntity{
         @Column
         private String email;
 
-        @ManyToOne
+//        @ManyToOne
         @JoinColumn(name = "apartment_id")
         private Long id;
 
