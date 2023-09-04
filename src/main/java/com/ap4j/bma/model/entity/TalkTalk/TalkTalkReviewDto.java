@@ -11,12 +11,14 @@ import java.util.Date;
  * 별도의 전달 객체를 활용해 연관관계를 맺은 엔티티간의 무한참조를 방지
  */
 @Data
+@Builder
+@AllArgsConstructor
 @NoArgsConstructor
 public class TalkTalkReviewDto {
 
     private int board_no;
     private String email;//회원아이디를 위한 이멜
-    private int id; //아파트 id번호
+    private Long id; //아파트 id번호
     private String content;
     private LocalDateTime create_at;
 

@@ -60,7 +60,27 @@ public class ApartmentServiceImpl implements ApartmentService {
                             longitude(longitude).
                             build();
             aptRepository.save(updateApt);
+
         }
+    }
+    @Transactional
+    public Long updateAptForReview(String roadName, Double latitude, Double longitude) {
+        AptEntity aptEntity = aptRepository.findByRoadName(roadName);
+        if (aptEntity != null) {
+            AptEntity updateApt = AptEntity.builder().
+                    id(aptEntity.getId()).
+                    district(aptEntity.getDistrict()).
+                    address(aptEntity.getAddress()).
+                    apartmentName(aptEntity.getApartmentName()).
+                    roadName(aptEntity.getRoadName()).
+                    latitude(latitude).
+                    longitude(longitude).
+                    build();
+            aptRepository.save(updateApt);
+
+            return updateApt.getId();// 리뷰작성시 가져갈 아파트아이디
+        }
+        return null;//아파트못찾으면 널 리턴
     }
 
     /**

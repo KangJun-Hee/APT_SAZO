@@ -2,12 +2,17 @@ package com.ap4j.bma.model.repository;
 
 import com.ap4j.bma.model.entity.TalkTalk.TalkTalkReviewEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
 public interface TalkTalkRepository extends JpaRepository<TalkTalkReviewEntity,Integer>{
+
+    @Query("select a from TalkTalkReviewEntity a where a.id =?1")
+    TalkTalkReviewEntity aptIdtoReview(Long id);
+
 
 //    Optional<MemberEntity> findByEmail(String email);   // email로 회원 정보 조회
 //    @Override

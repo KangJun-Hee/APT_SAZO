@@ -2,7 +2,9 @@ package com.ap4j.bma.service.talktalk;
 
 //import com.ap4j.bma.model.entity.TalkTalk.TalkTalkReplyDto;
 //import com.ap4j.bma.model.entity.TalkTalk.TalkTalkReviewDto;
+import com.ap4j.bma.model.entity.TalkTalk.TalkTalkReviewDto;
 import com.ap4j.bma.model.entity.TalkTalk.TalkTalkReviewEntity;
+import com.ap4j.bma.model.entity.apt.AptDTO;
 import com.ap4j.bma.model.repository.TalkTalkRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +22,34 @@ public class ReviewService {
     @Autowired
     private TalkTalkRepository talktalkRepository;
 
-//    public ReviewService(TalkTalkRepository talktalkRepository){
+    public void write(TalkTalkReviewEntity talkTalkReviewEntity){
+        //엔티티를 이 안에 넣어주는 것
+        log.info("리뷰엔티티 write 실행");
+        log.info("입력받은 내용의 엔티티객체" + talkTalkReviewEntity.toString());
+        talktalkRepository.save(talkTalkReviewEntity);
+    }
+
+//    게시글을 불러올 메소드 생성
+    public List<TalkTalkReviewEntity> reviewList(){
+        return talktalkRepository.findAll();
+    }
+
+
+    public List<TalkTalkReviewDto> aptIdtoReview(Long id);
+
+
+
+
+//    public boolean registerBoard(BoardDTO params);
+//    public BoardDTO getBoardDetail(Long idx);
+//    public boolean deleteBoard(Long idx);
+//    public List<BoardDTO> getBoardList();
+//    public boolean cntPlus(Long idx);
+
+
+
+
+    //    public ReviewService(TalkTalkRepository talktalkRepository){
 //        this.talktalkRepository = talktalkRepository;
 //    }
 //
@@ -69,25 +98,4 @@ public class ReviewService {
 //    public GuestbookDTO view(int idx);    //게시글 상세화면
 //    public void update(GuestbookDTO dto);    //게시글 수정
 //    public void delete(int idx);            //게시글 삭제
-
-
-
-    public void write(TalkTalkReviewEntity talkTalkReviewEntity){
-        //엔티티를 이 안에 넣어주는 것
-        log.info("서비스 write 실행");
-        log.info("입력받은 내용의 객체" + talkTalkReviewEntity.toString());
-        talktalkRepository.save(talkTalkReviewEntity);
-    }
-
-//    게시글을 불러올 메소드 생성
-    public List<TalkTalkReviewEntity> reviewList(){
-        return talktalkRepository.findAll();
-    }
-
-
-//    public boolean registerBoard(BoardDTO params);
-//    public BoardDTO getBoardDetail(Long idx);
-//    public boolean deleteBoard(Long idx);
-//    public List<BoardDTO> getBoardList();
-//    public boolean cntPlus(Long idx);
 }

@@ -1,17 +1,31 @@
-//package com.ap4j.bma.service.talktalk;
-//
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.data.domain.Page;
-//import org.springframework.data.domain.PageRequest;
-//import org.springframework.data.domain.Pageable;
-//import org.springframework.stereotype.Service;
-//
-//@Service
-//public class ReviewServiceImpl implements ReviewService {
-//
-//    @Autowired
-//    private BoardRepository boardRepository;
-//
+package com.ap4j.bma.service.talktalk;
+
+import com.ap4j.bma.model.entity.TalkTalk.TalkTalkReviewDto;
+import com.ap4j.bma.model.repository.TalkTalkRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
+
+@Service
+public class ReviewServiceImpl extends ReviewService {
+
+    @Autowired
+    private TalkTalkRepository reviewRepository;
+
+    public TalkTalkReviewDto aptIdtoReview(Long id){
+        TalkTalkReviewDto aptReview = null;
+        aptReview = TalkTalkReviewDto.builder().
+                board_no(aptReview.getBoard_no()).
+                content(aptReview.getContent()).
+                id(aptReview.getId()).
+                email(aptReview.getEmail()).
+                create_at(aptReview.getCreate_at()).
+                build();
+        return aptReview;
+    }
+
 //    @Override
 //    public boolean registerBoard(BoardDTO params) {
 //
@@ -68,4 +82,4 @@
 //    public Board findBoardByIdx(Long idx) {
 //        return boardRepository.findById(idx).orElse(new Board());
 //    }
-//}
+}

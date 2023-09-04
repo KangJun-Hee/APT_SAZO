@@ -43,9 +43,9 @@ public class TalkTalkReviewEntity{
         private String email;
 
         @Column
-        private int id;
+        private Long id;
 
-        @Column(name = "CONTENT", nullable = false,length = 1000)
+        @Column
         private String content;
 
         @CreationTimestamp
@@ -60,13 +60,16 @@ public class TalkTalkReviewEntity{
 //        private List<Comment> comments;
 
         @Builder
-        public TalkTalkReviewEntity(int board_no,String email,int id,String content,LocalDateTime create_at) {
+        public TalkTalkReviewEntity(int board_no,String email,Long id,String content,LocalDateTime create_at) {
                 this.board_no = board_no;
                 this.email = email;
                 this.id = id;
                 this.content = content;
                 this.create_at = create_at;
         }
+
+
+
 //
 //        public TalkTalkReviewDto toDTO(){
 //                return TalkTalkReviewDto.builder()

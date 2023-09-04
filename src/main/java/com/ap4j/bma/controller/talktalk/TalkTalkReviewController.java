@@ -3,7 +3,11 @@ package com.ap4j.bma.controller.talktalk;
 
 import com.ap4j.bma.model.entity.TalkTalk.TalkTalkReviewDto;
 import com.ap4j.bma.model.entity.TalkTalk.TalkTalkReviewEntity;
+import com.ap4j.bma.model.entity.apt.AptDTO;
+import com.ap4j.bma.model.entity.apt.AptEntity;
 import com.ap4j.bma.model.entity.member.MemberDTO;
+import com.ap4j.bma.service.apartment.ApartmentService;
+import com.ap4j.bma.service.apartment.ApartmentServiceImpl;
 import com.ap4j.bma.service.talktalk.ReviewService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
@@ -25,30 +29,10 @@ import java.util.List;
 public class TalkTalkReviewController {
     @Autowired
     private ReviewService reviewService;
-//    @GetMapping("/map/main")
-//    //게시물 작성 폼으로 이동하는 컨트롤러
-//    public String boardWriteForm(){
-//        //return 되는 정적 템플릿을 열어준다.
-//        return "/kakaomap/markerCluster";
-//    }
-
-    @PostMapping("/board/writepro")
-    public String boardwritePro(@RequestParam("content") String content, HttpSession session) {
-
-        log.info("내용: " + content);
-        TalkTalkReviewEntity test = new TalkTalkReviewEntity();
-        test.setId(99);
-        test.setBoard_no(99);
-        MemberDTO dto = (MemberDTO) session.getAttribute("loginMember");
-        String email = dto.getEmail();
-        test.setEmail(email);
-        test.setContent(content);
-
-        reviewService.write(test);
-        log.info(test.toString());
-        return "redirect:/map/main";
-//        return "success"; // 성공 페이지로 이동하도록 수정
-    }
+    @Autowired
+    private ApartmentService aptService;
+    @Autowired
+    ApartmentServiceImpl aptServiceImpl; // 아파트 서비스 주입
 
     @GetMapping("/board/list")
     public String reviewList(Model model){
@@ -70,6 +54,53 @@ public class TalkTalkReviewController {
         model.addAttribute("list", list);
         return "reviewlist";
     }
+
+
+    @PostMapping("/board/writepro")
+    public String boardwritePro(@RequestParam("content") String content, HttpSession session, Model model) {
+
+        log.info("리뷰컨트롤러 boardWritePro실행, content: " + content);
+        TalkTalkReviewEntity reviewEntity = new TalkTalkReviewEntity();
+
+
+//        AptEntity aptEntity = aptService.aptList();
+//        List<AptDTO> aptDTOList = aptService.aptList();
+//        int aptId = aptDTOList.get
+//        AptEntity aptEntity = aptService.updateApt(getClass(),id);
+//        reviewEntity.setId(99);
+//        AptDTO aptInfo = aptServiceImpl.getAptInfoById(apartmentId);
+
+        Long aptId = aptServiceImpl.updateAptForReview(roadName, latitude, longitude);
+        // 아파트 아이디를 리뷰 엔티티에 추가
+        if (aptId != null) {
+            reviewEntity.setId(aptId);
+        }
+
+
+        reviewEntity.setBoard_no(99);
+
+        MemberDTO dto = (MemberDTO) session.getAttribute("loginMember");
+        String email = dto.getEmail();
+        reviewEntity.setEmail(email);
+
+        reviewEntity.setContent(content);
+
+        reviewService.write(reviewEntity);
+        log.info(reviewEntity.toString());
+        return "redirect:/map/main";
+    }
+
+
+    //    @GetMapping("/map/main")
+//    //게시물 작성 폼으로 이동하는 컨트롤러
+//    public String boardWriteForm(){
+//        //return 되는 정적 템플릿을 열어준다.
+//        return "/kakaomap/markerCluster";
+//    }
+
+
+
+
 
 //    @Autowired
 //    private final ReviewService reviewService;
