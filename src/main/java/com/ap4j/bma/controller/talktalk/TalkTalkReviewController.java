@@ -33,6 +33,8 @@ public class TalkTalkReviewController {
     private ApartmentService aptService;
     @Autowired
     ApartmentServiceImpl aptServiceImpl; // 아파트 서비스 주입
+    @Autowired
+    private AptEntity aptEntity;
 
     @GetMapping("/board/list")
     public String reviewList(Model model){
@@ -57,7 +59,7 @@ public class TalkTalkReviewController {
 
 
     @PostMapping("/board/writepro")
-    public String boardwritePro(@RequestParam("content") String content, HttpSession session, Model model) {
+    public String boardwritePro(@RequestParam("content") String content, HttpSession session) {
 
         log.info("리뷰컨트롤러 boardWritePro실행, content: " + content);
         TalkTalkReviewEntity reviewEntity = new TalkTalkReviewEntity();
@@ -66,15 +68,13 @@ public class TalkTalkReviewController {
 //        AptEntity aptEntity = aptService.aptList();
 //        List<AptDTO> aptDTOList = aptService.aptList();
 //        int aptId = aptDTOList.get
-//        AptEntity aptEntity = aptService.updateApt(getClass(),id);
-//        reviewEntity.setId(99);
+        List<AptDTO> aptEntity = aptService.aptList();
+        for (AptDTO aptDTO: aptEntity){
+            aptDTO.getId();
+        }
+        reviewEntity.setId(99);
 //        AptDTO aptInfo = aptServiceImpl.getAptInfoById(apartmentId);
 
-        Long aptId = aptServiceImpl.updateAptForReview(roadName, latitude, longitude);
-        // 아파트 아이디를 리뷰 엔티티에 추가
-        if (aptId != null) {
-            reviewEntity.setId(aptId);
-        }
 
 
         reviewEntity.setBoard_no(99);
@@ -91,48 +91,4 @@ public class TalkTalkReviewController {
     }
 
 
-    //    @GetMapping("/map/main")
-//    //게시물 작성 폼으로 이동하는 컨트롤러
-//    public String boardWriteForm(){
-//        //return 되는 정적 템플릿을 열어준다.
-//        return "/kakaomap/markerCluster";
-//    }
-
-
-
-
-
-//    @Autowired
-//    private final ReviewService reviewService;
-//
-//    @Autowired
-//    private TalkTalkRepository talkTalkRepository;
-//
-//    public TalkTalkReviewController(ReviewService reviewService) {
-//        this.reviewService = reviewService;
-//    }
-//
-//    @GetMapping("/")
-//    public String list() {
-//        return "board/list.html";
-//    }
-//
-//    @GetMapping("/post")
-//    public String post() {
-//        return "board/post.html";
-//    }
-//
-//    @PostMapping("/post")
-//    public String write(BoardDto boardDto) {
-//        boardService.savePost(boardDto);
-//        return "redirect:/";
-//    }
-//
-//
-//    // 게시글 작성 페이지
-//    @GetMapping("/kakaomap/write.do")
-//    public String openPostWrite(Model model) {
-//        return "post/write";
-//    }
-//
 }

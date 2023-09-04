@@ -35,67 +35,7 @@ public class ReviewService {
     }
 
 
-    public List<TalkTalkReviewDto> aptIdtoReview(Long id);
-
-
-
-
-//    public boolean registerBoard(BoardDTO params);
-//    public BoardDTO getBoardDetail(Long idx);
-//    public boolean deleteBoard(Long idx);
-//    public List<BoardDTO> getBoardList();
-//    public boolean cntPlus(Long idx);
-
-
-
-
-    //    public ReviewService(TalkTalkRepository talktalkRepository){
-//        this.talktalkRepository = talktalkRepository;
-//    }
-//
-//    public void saveReview(TalkTalkReviewDto talkTalkReviewDto) {
-//        return talktalkRepository.save(boardDto.toEntity()).getId();
-//    }
-//    @Transactional
-//    public List<TalkTalkReviewDto> getReviewList() {
-//        List<Review> reviews = TalkTalkRepository.findAll();
-//        List<BoardDto> boardDtoList = new ArrayList<>();
-//
-//        for(Board board : boardList) {
-//            BoardDto boardDto = BoardDto.builder()
-//                    .id(board.getId())
-//                    .author(board.getAuthor())
-//                    .title(board.getTitle())
-//                    .content(board.getContent())
-//                    .createdDate(board.getCreatedDate())
-//                    .build();
-//            boardDtoList.add(boardDto);
-//        }
-//        return reviews.stream();
-//        .map(review -> new TalkTalkReplyDto(review.getBoard_no(), review.getId()))
-//                .collect(Collectors.toList());
-//    }
-//
-//
-//
-//    public List<TalkTalkReviewDto> list(){
-//        return talktalkRepository.findAll();
-//    } //게시글 목록
-//    public void insert(TalkTalkReviewDto dto)throws Exception{
-//        //파일 저장 처리
-//        String projectPath = System.getProperty("user.dir") + "\\src\\main\\resources\\static\\files";
-//        UUID uuid = UUID.randomUUID();
-//        String fileName = uuid + "_" + file.getOriginalFilename();
-//        File savaFile = new File(projectPath, fileName);
-//        file.transferTo(savaFile);
-//
-//        //파일을 DB에 저장
-//        //board.setFilename(fileName);
-//        //board.setFilepath("/files/" + fileName);
-//
-//        TalkTalkRepository.save(review);
-//    };    //게시글 추가
-//    public GuestbookDTO view(int idx);    //게시글 상세화면
-//    public void update(GuestbookDTO dto);    //게시글 수정
-//    public void delete(int idx);            //게시글 삭제
+    public List<TalkTalkReviewDto> aptIdtoReview(Long id) {
+        return ;
+    }
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 @AllArgsConstructor
 @ToString
 public class AptDTO {
+    private Long id;//아파트아이디
     private String district;            // 구주소
     private String address;             // 번지
     private String apartmentName;       // 아파트 이름
