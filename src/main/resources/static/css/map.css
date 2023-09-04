@@ -146,6 +146,7 @@ html,body{
   border:0; box-shadow: 0px 1px 2px #888;
 }
 .overlay_info a {
+
   display: block;
   height:40px;
   background: #d95050;
