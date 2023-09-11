@@ -8,6 +8,7 @@ import com.ap4j.bma.service.maemulReg.MaemulPhotoService;
 import com.ap4j.bma.service.maemulReg.MaemulRegService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,6 +30,9 @@ public class MaemulRegController {
     private MaemulPhotoRepository maemulPhotoRepository;
     @Autowired
     private MaemulPhotoService maemulPhotoService;
+
+    @Value("${spring.servlet.multipart.location}")
+    private String uploadDirectory; // 파일 업로드 경로
 
     //약관동의 페이지
     @GetMapping("/agree")
@@ -88,7 +92,8 @@ public class MaemulRegController {
                 log.info(String.valueOf(file));
                 log.info("**************");
                 // 이미지를 서버로 업로드하고 데이터베이스에 저장하는 로직 추가
-                maemulPhotoService.saveImage(file, maemulPhotoEntity);
+//                maemulPhotoService.saveImage(file, maemulPhotoEntity);
+                maemulPhotoService.saveImage(file, maemulPhotoEntity, uploadDirectory); // 수정된 부분
 
 
                 // 데이터베이스에 저장
