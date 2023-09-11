@@ -56,3 +56,11 @@ spring:
     properties:
      mail.smtp.auth: true
      mail.smtp.ssl.enable: true
+
+  # 이미지 저장 용량 설정
+  multipart-config:
+    max-file-size: 5242880
+
+  servlet:
+    multipart:
+      location: C:/project/src/main/resources/static/maemulPhoto

@@ -5,6 +5,7 @@ import com.ap4j.bma.model.entity.meamulReg.MaemulRegEntity;
 import com.ap4j.bma.model.entity.member.LikedEntity;
 import com.ap4j.bma.model.entity.member.MemberDTO;
 import com.ap4j.bma.model.entity.member.MemberEntity;
+import com.ap4j.bma.service.maemulReg.MaemulPhotoService;
 import com.ap4j.bma.service.member.LikedService;
 import com.ap4j.bma.service.member.MemberService;
 import com.ap4j.bma.service.member.RecentServiceImpl;
@@ -42,6 +43,9 @@ public class MemberController {
 
     @Autowired
     private PasswordEncoderConfig pwdConfig;
+
+    @Autowired
+    private MaemulPhotoService maemulPhotoService;
 
     /** 로그인 여부 체크 */
     public boolean loginStatus(HttpSession session) {
@@ -305,12 +309,16 @@ public class MemberController {
             page = 1;
         }
         List<MaemulRegEntity> mmList = qMemberService.getListByNickname(memberDTO.getNickname());
-
         Page<MaemulRegEntity> mmpList = qMemberService.getPageByNickname(nickname,page,pageSize);
+        List<String> photoPath = new ArrayList<>();
+        for (MaemulRegEntity mmp : mmpList){
+            photoPath.add(maemulPhotoService.onePhoto(mmp.getId()));
+        }
+        log.info("이미지리스트"+photoPath.get(1));
 
         model.addAttribute("mmList",mmpList);
         model.addAttribute("mmAllCnt",mmList.size());
-
+        model.addAttribute("photoPath",photoPath);
         return "userView/maemulManagement";
     }
     /** 매물 삭제 */
@@ -365,9 +373,17 @@ public class MemberController {
         }
 
         Page<MaemulRegEntity> mmpList = likedService.getPaginatedItems(nickname,page,pageSize);
+        List<String> photoPath = null;
+        for (MaemulRegEntity mmp : mmpList){
+            photoPath = new ArrayList<>();
+            photoPath.add(maemulPhotoService.onePhoto(mmp.getId()));
+        }
+
+
         Long totalCount = likedService.countLikedByNickname(nickname);
         model.addAttribute("totalCount",totalCount);
         model.addAttribute("mmpList",mmpList);
+        model.addAttribute("photoPath",photoPath);
 
         return "userView/maemulLiked";
     }
