@@ -42,8 +42,7 @@ spring:
 #   데이터베이스 설정
   datasource:
     generate-unique-name: false
-#    url: jdbc:mysql://18.219.34.36:3306/bma #공용
-    url: jdbc:mysql://127.0.0.1:3306/pos #개인
+    url: jdbc:mysql://18.219.34.36:3306/bma #공용
     username: root
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver
