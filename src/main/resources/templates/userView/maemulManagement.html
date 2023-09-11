@@ -63,7 +63,7 @@
                                                 <span th:text="${#temporals.format(mmList.createdAt, 'HH:mm:ss')}">HH:mm:ss</span>
                                             </td>
                                             <td id="o-d-photo">
-                                                <img th:src="@{/img/thumbs.jpg}" width="80">
+                                                <img th:src="${photoPath}" width="80">
                                             </td>
                                             <td id="o-d-type" th:text="${mmList.tradeType}"></td>
                                             <td class="o-link-td">
