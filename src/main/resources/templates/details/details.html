@@ -114,145 +114,1135 @@
 		</div>
 		<!-- y-con 여기에 사진이랑 매물 번호 등이 들어감 끝 -->
 
-		<!-- 두 번째 컨테이너 시작-->
-		<div class="y-second-con">
-			<!-- y-bu-con 사진 아래에 내용 적는 컨테이너 시작 -->
-			<div class="y-bu-con">
-				<!-- y-this-character 이런 특징이 있어요 시작 -->
-				<div class="y-this-character">
-					<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
-						 style="flex: 0 0 auto;">
-						<circle cx="12" cy="12" r="8.5" stroke="#DFDFDF"></circle>
-						<path fill-rule="evenodd" clip-rule="evenodd"
-							  d="M11.5081 13.0899C11.5504 13.3231 11.7546 13.5 12 13.5C12.2762 13.5 12.5 13.2761 12.5 13V8.5L12.492 8.41012C12.4496 8.17688 12.2455 8 12 8C11.7239 8 11.5 8.22386 11.5 8.5V13L11.5081 13.0899ZM12 16.2C12.3314 16.2 12.6 15.9314 12.6 15.6C12.6 15.2686 12.3314 15 12 15C11.6687 15 11.4 15.2686 11.4 15.6C11.4 15.9314 11.6687 16.2 12 16.2Z"
-							  fill="#222222"></path>
-					</svg>
-					<div th:if="${maemulList.features != null}" class="y-this-text">이런 특징이 있어요</div>
+		<div class="a_setgridAndAside">
+			<div class="a_setGrid">
+				<!-- 두 번째 컨테이너 시작-->
+				<div class="y-second-con">
+					<!-- y-bu-con 사진 아래에 내용 적는 컨테이너 시작 -->
+					<div class="y-bu-con">
+						<!-- y-this-character 이런 특징이 있어요 시작 -->
+						<div class="y-this-character">
+							<svg width="24" height="24" viewbox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"
+								 style="flex: 0 0 auto;">
+								<circle cx="12" cy="12" r="8.5" stroke="#DFDFDF"></circle>
+								<path fill-rule="evenodd" clip-rule="evenodd"
+									  d="M11.5081 13.0899C11.5504 13.3231 11.7546 13.5 12 13.5C12.2762 13.5 12.5 13.2761 12.5 13V8.5L12.492 8.41012C12.4496 8.17688 12.2455 8 12 8C11.7239 8 11.5 8.22386 11.5 8.5V13L11.5081 13.0899ZM12 16.2C12.3314 16.2 12.6 15.9314 12.6 15.6C12.6 15.2686 12.3314 15 12 15C11.6687 15 11.4 15.2686 11.4 15.6C11.4 15.9314 11.6687 16.2 12 16.2Z"
+									  fill="#222222"></path>
+							</svg>
+							<div th:if="${maemulList.features != null}" class="y-this-text">이런 특징이 있어요</div>
 
-					<div th:if="${maemulList == null or maemulList.features == null or maemulList.features.isEmpty()}"
-						 class="y-this-text">
-						등록된 특징이 없어요
+							<div th:if="${maemulList == null or maemulList.features == null or maemulList.features.isEmpty()}"
+								 class="y-this-text">
+								등록된 특징이 없어요
+							</div>
+
+							<div class="y-characters">
+								<div th:if="${maemulList == null or maemulList.features == null or maemulList.features.isEmpty()}"
+									 class="y-c-list">
+									<span>X</span>
+								</div>
+							</div>
+
+							<div th:if="${maemulList != null and maemulList.features != null and not maemulList.features.isEmpty()}"
+								 class="y-characters">
+								<div th:if="${maemulList.features.contains('단기')}" class="y-c-list">
+									<span>단기</span>
+								</div>
+								<div th:if="${maemulList.features.contains('신축')}" class="y-c-list">
+									<span>신축</span>
+								</div>
+								<div th:if="${maemulList.features.contains('투자')}" class="y-c-list">
+									<span>투자</span>
+								</div>
+								<div th:if="${maemulList.features.contains('풀옵션')}" class="y-c-list">
+									<span>풀옵션</span>
+								</div>
+								<div th:if="${maemulList.features.contains('엘리베이터')}" class="y-c-list">
+									<span>엘리베이터</span>
+								</div>
+								<div th:if="${maemulList.features.contains('보안/안전')}" class="y-c-list">
+									<span>보안/안전</span>
+								</div>
+								<div th:if="${maemulList.features.contains('분리형')}" class="y-c-list">
+									<span>분리형</span>
+								</div>
+							</div>
+						</div>
+						<!-- y-this-character 이런 특징이 있어요 끝 -->
+
+						<!-- 가격 정보 -->
+						<div class="y-information-price">
+							<div class="y-info-header">
+								<p>가격정보</p>
+							</div>
+							<ul class="y-lists">
+								<li>
+									<div class="y-list-title">
+										<p th:text="${maemulList.tradeType}"></p>
+									</div>
+									<div class="y-list-content">
+										<p th:if="${maemulList.tradeType == '매매'}"
+										   th:with="sp_djr=${maemulList.sellingPrice / 10000}, sp_aks=${maemulList.sellingPrice % 10000}"
+										   th:text="${#strings.concat(sp_djr > 0 ? sp_djr + '억 ' : '', sp_aks > 0 ? sp_aks + '만원' : '')}">
+										</p>
+										<p th:if="${maemulList.tradeType == '전세'}"
+										   th:with="dp_djr=${maemulList.depositForLease / 10000}, dp_aks=${maemulList.depositForLease % 10000}"
+										   th:text="${#strings.concat(dp_djr > 0 ? dp_djr + '억 ' : '', dp_aks > 0 ? dp_aks + '만원' : '')}">
+										</p>
+										<p th:if="${maemulList.tradeType == '월세'}"
+										   th:with="mr_djr=${maemulList.monthlyRent / 10000}, mr_aks=${maemulList.monthlyRent % 10000}, mfr_djr=${maemulList.monthlyForRent / 10000}, mfr_aks=${maemulList.monthlyForRent % 10000}"
+										   th:text="${'월세 ' + #strings.concat(mfr_djr > 0 ? mfr_djr + '억 ' : '', mfr_aks > 0 ? mfr_aks + '/' : '')} + ${#strings.concat(mr_djr > 0 ? mr_djr + '억 ' : '', mr_aks > 0 ? mr_aks : '')}">
+
+										</p>
+									</div>
+								</li>
+								<li>
+									<div class="y-list-title">
+										<p>융자금</p>
+									</div>
+									<div class="y-list-content">
+										<p th:if="${maemulList.loanAmount == 0}">-</p>
+										<p th:unless="${maemulList.loanAmount == 0}">[[${maemulList.loanAmount}]]</p>
+									</div>
+								</li>
+								<li>
+									<div class="y-list-title">
+										<p>관리비</p>
+									</div>
+									<div class="y-list-content">
+										<p th:unless="${maemulList.managementFee == 0}">매월
+											[[${maemulList.managementFee}]] 만원</p>
+										<p th:if="${maemulList.managementFee == 0}">-</p>
+									</div>
+								</li>
+								<li>
+									<div class="y-list-title">
+										<p>주차가능여부</p>
+									</div>
+									<div class="y-list-content">
+										<p th:if="${maemulList.totalParking != 0}">가능</p>
+										<p th:if="${maemulList.totalParking == 0}">불가능</p>
+									</div>
+								</li>
+								<li>
+									<div class="y-list-title">
+										<p>단기임대</p>
+									</div>
+									<div class="y-list-content">
+										<p th:if="${maemulList.shortTermRental.equals('가능')}">가능</p>
+										<p th:if="${maemulList.shortTermRental.equals('불가능')}">불가능</p>
+									</div>
+								</li>
+								<li th:unless="${maemulList.monthlyRent == 0}">
+									<div class="y-list-title">
+										<p>한달 예상 주거비용</p>
+									</div>
+									<div class="y-list-content">
+										<div class="y-blue-text">
+											<strong>[[${maemulList.monthlyRent + maemulList.managementFee}]]만원
+												+a</strong>
+										</div>
+										<div class="y-monthly-pay">
+											<p>월세 + 관리비</p>
+										</div>
+										<div class="y-explain">
+											<p>별도 금액으로 부과되는 항목 제외</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+						</div>
+						<!-- 가격 정보 끝 -->
+
 					</div>
 
-					<div class="y-characters">
-						<div th:if="${maemulList == null or maemulList.features == null or maemulList.features.isEmpty()}"
-							 class="y-c-list">
-							<span>X</span>
+					<!-- y-bu-con 사진 아래에 내용 적는 컨테이너 시작 끝 -->
+					<div class="y-information-price">
+						<div class="y-info-header">
+							<p>상세정보</p>
 						</div>
-					</div>
-
-					<div th:if="${maemulList != null and maemulList.features != null and not maemulList.features.isEmpty()}"
-						 class="y-characters">
-						<div th:if="${maemulList.features.contains('단기')}" class="y-c-list">
-							<span>단기</span>
-						</div>
-						<div th:if="${maemulList.features.contains('신축')}" class="y-c-list">
-							<span>신축</span>
-						</div>
-						<div th:if="${maemulList.features.contains('투자')}" class="y-c-list">
-							<span>투자</span>
-						</div>
-						<div th:if="${maemulList.features.contains('풀옵션')}" class="y-c-list">
-							<span>풀옵션</span>
-						</div>
-						<div th:if="${maemulList.features.contains('엘리베이터')}" class="y-c-list">
-							<span>엘리베이터</span>
-						</div>
-						<div th:if="${maemulList.features.contains('보안/안전')}" class="y-c-list">
-							<span>보안/안전</span>
-						</div>
-						<div th:if="${maemulList.features.contains('분리형')}" class="y-c-list">
-							<span>분리형</span>
-						</div>
+						<ul class="y-lists">
+							<li>
+								<div class="y-list-title">
+									<p>방종류</p>
+								</div>
+								<div class="y-list-content">
+									<p>원룸(분리형)</p>
+								</div>
+							</li>
+							<li>
+								<div class="y-list-title">
+									<p>해당층/건물층</p>
+								</div>
+								<div class="y-list-content">
+									<p>[[${maemulList.floorNumber}]]층/[[${maemulList.totalFloors}]]층</p>
+								</div>
+							</li>
+							<li>
+								<div class="y-list-title">
+									<p>전용/공급면적</p>
+								</div>
+								<div class="y-list-content">
+									<p>[[${maemulList.privateArea}]]㎡/[[${maemulList.supplyArea}]]㎡</p>
+								</div>
+							</li>
+							<li>
+								<div class="y-list-title">
+									<p>방 수/욕실 수</p>
+								</div>
+								<div class="y-list-content">
+									<p>[[${maemulList.numberOfRooms}]]개/[[${maemulList.numberOfBathrooms}]]개</p>
+								</div>
+							</li>
+							<li>
+								<div class="y-list-title">
+									<p>방향</p>
+								</div>
+								<div class="y-list-content y-yt">
+									<p>
+										[[${maemulList.direction}]]
+									</p>
+									<p class=" y-rjtlf">거실 기준</p>
+								</div>
+							</li>
+							<li>
+								<div class="y-list-title">
+									<p>난방종류</p>
+								</div>
+								<div class="y-list-content">
+									<p>[[${maemulList.heatingType}]]</p>
+								</div>
+							</li>
+							<li>
+								<div class="y-list-title">
+									<p>엘리베이터</p>
+								</div>
+								<div class="y-list-content">
+									<p th:if="${maemulList.elevator.contains('유')}">있음</p>
+									<p th:if="${maemulList.elevator.contains('무')}">있음</p>
+								</div>
+							</li>
+							<li th:if="${maemulList.totalParking != 0}">
+								<div class="y-list-title">
+									<p>총 주차대수</p>
+								</div>
+								<div class="y-list-content">
+									<p>총 [[${maemulList.totalParking}]]대</p>
+								</div>
+							</li>
+							<li>
+								<div class="y-list-title">
+									<p>입주가능일</p>
+								</div>
+								<div class="y-list-content">
+									<!-- <p>즉시 입주</p>-->
+									<p>[[${maemulList.availableMoveInDate}]]</p>
+								</div>
+							</li>
+							<li>
+								<div class="y-list-title">
+									<p>건축물용도</p>
+								</div>
+								<div class="y-list-content">
+									<p>[[${maemulList.buildingUsage}]]</p>
+								</div>
+							</li>
+							<li>
+								<div class="y-list-title">
+									<p>매물등록일</p>
+								</div>
+								<div class="y-list-content">
+									<td th:text="${#temporals.format(maemulList.createdAt, 'yyyy-MM-dd')}">yyyy-MM-dd</td>
+								</div>
+							</li>
+						</ul>
 					</div>
 				</div>
-				<!-- y-this-character 이런 특징이 있어요 끝 -->
+				<!-- y-second-con 두 번째 컨테이너 끝 -->
 
-				<!-- 가격 정보 -->
-				<div class="y-information-price">
-					<div class="y-info-header">
-						<p>가격정보</p>
+				<!-- 옵션 시작 -->
+				<!-- y-bigbig-con 시작 -->
+				<div class="y-bigbig-con">
+					<div class="y-information-price option">
+						<div class="y-info-header">
+							<p>옵션</p>
+						</div>
+						<div th:if="${maemulList == null or maemulList?.optional == null or maemulList.optional.isEmpty()}"
+							 class="">
+							등록되어 있는 옵션이 없어요!
+						</div>
+						<ul th:if="${maemulList != null and maemulList.optional != null and not maemulList.optional.isEmpty()}"
+							class="y-lists y-option">
+							<!-- 벽걸이형 -->
+							<li th:if="${maemulList.optional.contains('벽걸이형')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path d="M25 34H23V40H25V34Z" fill="#434343"></path>
+											<path d="M12 39V37C13.65 37 15 35.65 15 34H17C17 36.76 14.76 39 12 39Z"
+												  fill="#434343"></path>
+											<path d="M36 39C33.24 39 31 36.76 31 34H33C33 35.65 34.35 37 36 37V39Z"
+												  fill="#434343"></path>
+											<path
+													d="M40 10H8C6.9 10 6 10.9 6 12V30C6 31.1 6.9 32 8 32H40C41.1 32 42 31.1 42 30V12C42 10.9 41.1 10 40 10ZM14 30V28H34V30H14ZM40 30H36V26H12V30H8V24H40V30ZM40 22H8V12H40V22Z"
+													fill="#434343"></path>
+											<path d="M13.97 14H11.97V16H13.97V14Z" fill="#434343"></path>
+											<path d="M13.97 17.99H11.97V19.99H13.97V17.99Z" fill="#434343"></path>
+											<path d="M35.97 17.99H31.97V19.99H35.97V17.99Z" fill="#434343"></path>
+										</svg>
+
+									</div>
+									<p>벽걸이형</p>
+								</div>
+							</li>
+							<!-- 벽걸이형 끝 -->
+
+							<!-- 침대 -->
+							<li th:if="${maemulList.optional.contains('침대')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path
+													d="M35.98 6H11.99C10.88 6 9.97998 6.9 9.97998 8V40C9.97998 41.1 10.88 42 11.99 42H35.98C37.09 42 37.99 41.1 37.99 40V8C37.99 6.9 37.09 6 35.98 6ZM35.98 40H11.99V24H35.98V40ZM35.98 22H11.99V18H35.98V22ZM24.99 12H31.99V16H24.99V12ZM22.99 16H15.99V12H22.99V16ZM35.98 16H33.99V10H13.99V16H12V8H35.99V16H35.98Z"
+													fill="#434343"></path>
+										</svg>
+									</div>
+									<p>침대</p>
+								</div>
+							</li>
+							<!-- 침대 끝 -->
+
+							<!-- 책상 -->
+							<li th:if="${maemulList.optional.contains('책상')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path d="M33.99 20H31.99V21.99H33.99V20Z" fill="#434343"></path>
+											<path
+													d="M40.99 10H6.98999C6.43999 10 5.98999 10.45 5.98999 11V38H7.98999V18H23.99V34.02H39.99V38H41.99V11C41.99 10.45 41.54 10 40.99 10ZM39.99 32.02H25.99V26.02H39.99V32.02ZM39.99 24.02H25.99V18.02H39.99V24.02ZM39.99 16H7.98999V12H39.99V16Z"
+													fill="#434343"></path>
+											<path d="M33.99 28.01H31.99V30H33.99V28.01Z" fill="#434343"></path>
+										</svg>
+									</div>
+									<p>책상</p>
+								</div>
+							</li>
+							<!-- 책상 끝 -->
+
+							<!-- 옷장 -->
+							<li th:if="${maemulList.optional.contains('옷장')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path
+													d="M36 6H12C10.9 6 10 6.9 10 8V36C10 37.1 10.9 38 12 38V42H14V38H34V42H36V38C37.1 38 38 37.1 38 36V8C38 6.9 37.1 6 36 6ZM22 36H12V26H22V36ZM22 24H12V20H22V24ZM22 18H12V14H22V18ZM22 12H12V8H22V12ZM36 36H24V8H36V36Z"
+													fill="#434343"></path>
+											<path d="M28 20H26V24H28V20Z" fill="#434343"></path>
+										</svg>
+									</div>
+									<p>옷장</p>
+								</div>
+							</li>
+							<!-- 옷장 끝 -->
+
+							<!-- 식탁 -->
+							<li th:if="${maemulList.optional.contains('식탁')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path
+													d="M40.16 10.02L40.18 10H7.83L7.85 10.02C6.82 10.1 6 10.95 6 12V16C6 17.1 6.9 18 8 18H10V38H12V30H36V38H38V18H40C41.1 18 42 17.1 42 16V12C42 10.95 41.19 10.1 40.16 10.02ZM30.6 16L30.36 16.21L29.5 17L24 22L19.6 18L19.26 17.69L18.5 17L17.64 16.21L17.4 16L13 12H35L30.6 16ZM10 16H8V12H10.03L11.66 13.48L14.43 16H12H10ZM36 28H12V18H16.63L17.16 18.48L22.66 23.48L24.01 24.7L25.36 23.48L30.86 18.48L31.39 18H36.01V28H36ZM40 16H38H36H33.58L36.35 13.48L37.98 12H40V16Z"
+													fill="#434343"></path>
+										</svg>
+									</div>
+									<p>식탁</p>
+								</div>
+							</li>
+							<!-- 식탁 끝 -->
+
+							<!-- 소파 -->
+							<li th:if="${maemulList.optional.contains('소파')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path
+													d="M41.99 24C41.99 21.79 40.2 20 37.99 20V16C37.99 12.69 35.3 10 31.99 10H15.99C12.68 10 9.98999 12.69 9.98999 16V20C7.77999 20 5.98999 21.79 5.98999 24C5.98999 24.73 6.19999 25.41 6.54999 26H5.98999V34H9.98999V38H11.99V34H35.99V38H37.99V34H41.99V26H41.43C41.77 25.41 41.99 24.73 41.99 24ZM39.99 24C39.99 25.1 39.09 26 37.99 26C36.89 26 35.99 25.1 35.99 24C35.99 23.59 36.12 23.2 36.33 22.88C36.47 22.67 36.66 22.48 36.87 22.34C37.19 22.12 37.57 22 37.99 22C39.09 22 39.99 22.9 39.99 24ZM11.99 16C11.99 13.79 13.78 12 15.99 12H31.99C34.2 12 35.99 13.79 35.99 16V20.56C34.8 21.25 33.99 22.53 33.99 24C33.99 24.73 34.2 25.41 34.55 26H13.44C13.78 25.41 14 24.73 14 24C14 22.53 13.19 21.25 12 20.56V16H11.99ZM9.98999 22C10.4 22 10.79 22.13 11.11 22.34C11.22 22.41 11.32 22.49 11.41 22.58C11.5 22.67 11.58 22.77 11.65 22.88C11.87 23.2 11.99 23.58 11.99 24C11.99 25.1 11.09 26 9.98999 26C8.88999 26 7.98999 25.1 7.98999 24C7.98999 22.9 8.88999 22 9.98999 22ZM39.99 32H7.98999V28H22.99V32H24.99V28H39.99V32Z"
+													fill="#434343"></path>
+										</svg>
+									</div>
+									<p>소파</p>
+								</div>
+							</li>
+							<!-- 소파 끝 -->
+
+							<!-- 천장형에어컨 -->
+							<li th:if="${maemulList.optional.contains('천장형에어컨')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path
+													d="M35.99 8V32H11.99V8H35.99ZM35.99 6H11.99C10.89 6 9.98999 6.9 9.98999 8V32C9.98999 33.1 10.89 34 11.99 34H35.99C37.09 34 37.99 33.1 37.99 32V8C37.99 6.9 37.09 6 35.99 6Z"
+													fill="#434343"></path>
+											<path d="M27.99 16V24H19.99V16H27.99ZM29.99 14H17.99V26H29.99V14Z" fill="#434343">
+											</path>
+											<path d="M24.99 36H22.99V42H24.99V36Z" fill="#434343"></path>
+											<path
+													d="M11.99 41V39C13.64 39 14.99 37.65 14.99 36H16.99C16.99 38.76 14.75 41 11.99 41Z"
+													fill="#434343"></path>
+											<path
+													d="M35.99 41C33.23 41 30.99 38.76 30.99 36H32.99C32.99 37.65 34.34 39 35.99 39V41Z"
+													fill="#434343"></path>
+											<path d="M29.99 10H17.99V12H29.99V10Z" fill="#434343"></path>
+											<path d="M29.99 28H17.99V30H29.99V28Z" fill="#434343"></path>
+											<path d="M33.99 26V14H31.99V26H33.99Z" fill="#434343"></path>
+											<path d="M15.99 26V14H13.99V26H15.99Z" fill="#434343"></path>
+										</svg>
+									</div>
+									<p>천장형에어컨</p>
+								</div>
+							</li>
+							<!-- 천장형에어컨 끝 -->
+
+							<!-- 무인택배함 -->
+							<li th:if="${maemulList.optional.contains('무인택배함')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path
+													d="M34 8H8V34H19.92H21.99V32H19.92C16.61 32 13.3 32 10 32V10H18V20H26V10H34V22H36V8H34ZM24 18H20V10H24V18Z"
+													fill="#434343"></path>
+											<path
+													d="M32 25.97C35.31 25.97 38 28.66 38 31.97C38 35.28 35.31 37.97 32 37.97C28.69 37.97 26 35.28 26 31.97C26 28.66 28.69 25.97 32 25.97ZM32 23.97C27.59 23.97 24 27.56 24 31.97C24 36.38 27.59 39.97 32 39.97C36.41 39.97 40 36.38 40 31.97C40 27.56 36.41 23.97 32 23.97Z"
+													fill="#434343"></path>
+											<path d="M36 32.97H31V27.97H33V30.97H36V32.97Z" fill="#434343"></path>
+										</svg>
+									</div>
+									<p>무인택배함</p>
+								</div>
+							</li>
+							<!-- 무인택배함 끝 -->
+
+							<!-- 비데 -->
+							<li th:if="${maemulList.optional.contains('비데')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path
+													d="M35.99 6V20H23.99V16C23.99 14.9 24.89 14 25.99 14C27.09 14 27.99 14.9 27.99 16H29.99C29.99 13.79 28.2 12 25.99 12C24.79 12 23.72 12.54 22.99 13.38C22.26 12.54 21.19 12 19.99 12C17.78 12 15.99 13.79 15.99 16H17.99C17.99 14.9 18.89 14 19.99 14C21.09 14 21.99 14.9 21.99 16V20H9.98999C8.88999 20 7.98999 20.9 7.98999 22C7.98999 27.51 12.78 32 18.66 32H21.99V42H37.99V6H35.99ZM35.99 40H23.99V32H35.99V40ZM23.99 30H18.66C13.87 30 9.98999 26.42 9.98999 22H35.99V30H23.99Z"
+													fill="#434343"></path>
+										</svg>
+									</div>
+									<p>비데</p>
+								</div>
+							</li>
+							<!-- 비데 끝 -->
+
+							<!-- 신발장 -->
+							<li th:if="${maemulList.optional.contains('신발장')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path
+													d="M32.81 22H27.99V12C27.99 10.9 27.09 10 25.99 10H7.98999C6.88999 10 5.98999 10.9 5.98999 12V36C5.98999 37.1 6.88999 38 7.98999 38H39.99C41.09 38 41.99 37.1 41.99 36V32C41.99 26.49 37.87 22 32.81 22ZM21.99 12H25.99V14V15.99H21.99V12ZM7.98999 26C11.3 26 13.99 28.69 13.99 32H7.98999V26ZM39.99 36H7.98999V34H39.99V36ZM15.99 32C15.99 27.59 12.4 24 7.98999 24V12H19.99V15.99V17.99H25.99V20.02H19.99V22.02H25.99V23C25.99 23.55 26.44 24 26.99 24H32.81C36.77 24 39.99 27.59 39.99 32H15.99Z"
+													fill="#434343"></path>
+										</svg>
+									</div>
+									<p>신발장</p>
+								</div>
+							</li>
+							<!-- 신발장 끝 -->
+
+							<!-- 냉장고 -->
+							<li th:if="${maemulList.optional.contains('냉장고')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path
+													d="M35.99 6H11.99C10.89 6 9.98999 6.9 9.98999 8V40C9.98999 41.1 10.89 42 11.99 42H35.99C37.09 42 37.99 41.1 37.99 40V8C37.99 6.9 37.09 6 35.99 6ZM35.99 40H11.99V22H35.99V40ZM35.99 20H11.99V8H35.99V20Z"
+													fill="#434343"></path>
+											<path d="M17.99 12H15.99V15.99H17.99V12Z" fill="#434343"></path>
+											<path d="M17.99 26.01H15.99V30H17.99V26.01Z" fill="#434343"></path>
+										</svg>
+									</div>
+									<p>냉장고</p>
+								</div>
+							</li>
+							<!-- 냉장고 끝 -->
+
+							<!-- 세탁기 -->
+							<li th:if="${maemulList.optional.contains('세탁기')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path d="M34 12H30V14H34V12Z" fill="#434343"></path>
+											<path d="M16 12H14V14H16V12Z" fill="#434343"></path>
+											<path d="M20 12H18V14H20V12Z" fill="#434343"></path>
+											<path
+													d="M38 8H10C8.9 8 8 8.9 8 10V38C8 39.1 8.9 40 10 40H38C39.1 40 40 39.1 40 38V10C40 8.9 39.1 8 38 8ZM38 38H10V18H38V38ZM38 16H10V10H38V16Z"
+													fill="#434343"></path>
+											<path
+													d="M24 20C19.59 20 16 23.59 16 28C16 32.41 19.59 36 24 36C28.41 36 32 32.41 32 28C32 23.59 28.41 20 24 20ZM24 22C26.97 22 29.43 24.16 29.91 27H18.09C18.57 24.16 21.03 22 24 22ZM24 34C21.03 34 18.57 31.84 18.09 29H29.91C29.43 31.84 26.97 34 24 34Z"
+													fill="#434343"></path>
+										</svg>
+									</div>
+									<p>세탁기</p>
+								</div>
+							</li>
+							<!-- 세탁기 끝 -->
+
+							<!-- 샤워부스 -->
+							<li th:if="${maemulList.optional.contains('샤워부스')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path d="M19.99 20H17.99V22H19.99V20Z" fill="#434343"></path>
+											<path d="M19.99 28H17.99V30H19.99V28Z" fill="#434343"></path>
+											<path d="M29.99 20H27.99V22H29.99V20Z" fill="#434343"></path>
+											<path d="M29.99 28H27.99V30H29.99V28Z" fill="#434343"></path>
+											<path d="M21.99 15.99H19.99V17.99H21.99V15.99Z" fill="#434343"></path>
+											<path d="M27.99 15.99H25.99V17.99H27.99V15.99Z" fill="#434343"></path>
+											<path d="M21.99 24H19.99V26H21.99V24Z" fill="#434343"></path>
+											<path d="M27.99 24H25.99V26H27.99V24Z" fill="#434343"></path>
+											<path d="M24.99 20H22.99V22H24.99V20Z" fill="#434343"></path>
+											<path d="M24.99 28H22.99V30H24.99V28Z" fill="#434343"></path>
+											<path
+													d="M35.95 6H12.03C10.93 6 10.03 6.9 10.03 8V40C10.03 41.1 10.93 42 12.03 42H35.95C37.05 42 37.95 41.1 37.95 40V8C37.95 6.9 37.05 6 35.95 6ZM23 8V12H17.99V14H29.99V12H25V8H35.95V36H12.03V8H22.99H23ZM12.04 40V38H35.96V40H12.04Z"
+													fill="#434343"></path>
+										</svg>
+									</div>
+									<p>샤워부스</p>
+								</div>
+							</li>
+							<!-- 샤워부스 끝 -->
+
+							<!-- 싱크대 -->
+							<li th:if="${maemulList.optional.contains('싱크대')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path d="M36 18H32V20H36V18Z" fill="#434343"></path>
+											<path d="M36 23H32V25H36V23Z" fill="#434343"></path>
+											<path d="M36 28H32V30H36V28Z" fill="#434343"></path>
+											<path
+													d="M40 10H19.92V8H17.92V10H8C6.9 10 6 10.9 6 12V36C6 37.1 6.9 38 8 38H40C41.1 38 42 37.1 42 36V12C42 10.9 41.1 10 40 10ZM40 36H8V12H17.92V14H9.99V34H27.99V14H19.92V12H40V36ZM19.92 18.02V16H25.99V32H11.99V16H17.92V18.02H19.92Z"
+													fill="#434343"></path>
+											<path
+													d="M15.98 24C15.98 25.65 17.33 27 18.98 27C20.63 27 21.98 25.65 21.98 24C21.98 22.35 20.63 21 18.98 21C17.33 21 15.98 22.35 15.98 24ZM18.98 23C19.53 23 19.98 23.45 19.98 24C19.98 24.55 19.53 25 18.98 25C18.43 25 17.98 24.55 17.98 24C17.98 23.45 18.43 23 18.98 23Z"
+													fill="#434343"></path>
+										</svg>
+									</div>
+									<p>싱크대</p>
+								</div>
+							</li>
+							<!-- 싱크대 끝 -->
+
+							<!-- 인덕션 -->
+							<li th:if="${maemulList.optional.contains('인덕션')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path
+													d="M39.99 12V36H7.98999V12H39.99ZM39.99 10H7.98999C6.88999 10 5.98999 10.9 5.98999 12V36C5.98999 37.1 6.88999 38 7.98999 38H39.99C41.09 38 41.99 37.1 41.99 36V12C41.99 10.9 41.09 10 39.99 10Z"
+													fill="#434343"></path>
+											<path d="M17.99 32H13.99V34H17.99V32Z" fill="#434343"></path>
+											<path d="M33.99 32H29.99V34H33.99V32Z" fill="#434343"></path>
+											<path
+													d="M15.99 16C12.68 16 9.98999 18.69 9.98999 22C9.98999 25.31 12.68 28 15.99 28C19.3 28 21.99 25.31 21.99 22C21.99 18.69 19.3 16 15.99 16ZM16.99 25.86V24H14.99V25.86C13.59 25.5 12.49 24.4 12.13 23H13.99V21H12.13C12.49 19.6 13.59 18.5 14.99 18.14V20H16.99V18.14C18.39 18.5 19.49 19.6 19.85 21H17.99V23H19.85C19.49 24.4 18.39 25.5 16.99 25.86Z"
+													fill="#434343"></path>
+											<path
+													d="M31.99 16C28.68 16 25.99 18.69 25.99 22C25.99 25.31 28.68 28 31.99 28C35.3 28 37.99 25.31 37.99 22C37.99 18.69 35.3 16 31.99 16ZM32.99 25.86V24H30.99V25.86C29.59 25.5 28.49 24.4 28.13 23H29.99V21H28.13C28.49 19.6 29.59 18.5 30.99 18.14V20H32.99V18.14C34.39 18.5 35.49 19.6 35.85 21H33.99V23H35.85C35.49 24.4 34.39 25.5 32.99 25.86Z"
+													fill="#434343"></path>
+										</svg>
+									</div>
+									<p>인덕션</p>
+								</div>
+							</li>
+							<!-- 인덕션 끝 -->
+
+							<!-- 전자레인지 -->
+							<li th:if="${maemulList.optional.contains('전자레인지')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path
+													d="M39.99 12V36H7.98999V12H39.99ZM39.99 10H7.98999C6.88999 10 5.98999 10.9 5.98999 12V36C5.98999 37.1 6.88999 38 7.98999 38H39.99C41.09 38 41.99 37.1 41.99 36V12C41.99 10.9 41.09 10 39.99 10Z"
+													fill="#434343"></path>
+											<path d="M37.01 20H35.01V22H37.01V20Z" fill="#434343"></path>
+											<path d="M37.01 16H35.01V18H37.01V16Z" fill="#434343"></path>
+											<path d="M27.99 22H25.99V26H27.99V22Z" fill="#434343"></path>
+											<path d="M29.99 18V30H11.99V18H29.99ZM31.99 16H9.98999V32H31.99V16Z" fill="#434343">
+											</path>
+										</svg>
+									</div>
+									<p>전자레인지</p>
+								</div>
+							</li>
+							<!-- 전자레인지 끝 -->
+
+							<!-- TV -->
+							<li th:if="${maemulList.optional.contains('TV')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path d="M36 12H34V14H36V12Z" fill="#434343"></path>
+											<path d="M36 16H34V18H36V16Z" fill="#434343"></path>
+											<path
+													d="M38 8H10C8.9 8 8 8.9 8 10V30C8 31.1 8.9 32 10 32H12.97L11.03 39.76L12.97 40.24L15.03 31.99H32.97L35.03 40.24L36.97 39.76L35.03 32H38C39.1 32 40 31.1 40 30V10C40 8.9 39.1 8 38 8ZM38 30H10V10H38V30Z"
+													fill="#434343"></path>
+											<path d="M30 14V26H14V14H30ZM32 12H12V28H32V12Z" fill="#434343"></path>
+										</svg>
+									</div>
+									<p>TV</p>
+								</div>
+							</li>
+							<!-- TV 끝 -->
+
+							<!-- 붙박이장 -->
+							<li th:if="${maemulList.optional.contains('붙박이장')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path
+													d="M36 6H12C10.9 6 10 6.9 10 8V40C10 41.1 10.9 42 12 42H36C37.1 42 38 41.1 38 40V8C38 6.9 37.1 6 36 6ZM12 8H23V14H12V8ZM12 16H23V22H12V16ZM12 40V24H23V40H12ZM36 40H25V8H36V40Z"
+													fill="#434343"></path>
+											<path d="M29.9902 22H27.9902V26H29.9902V22Z" fill="#434343"></path>
+										</svg>
+									</div>
+									<p>붙박이장</p>
+								</div>
+							</li>
+							<!-- 붙박이장 끝 -->
+
+							<!-- 에어컨 -->
+							<li th:if="${maemulList.optional.contains('에어컨')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path d="M28 12H14V14H28V12Z" fill="#434343"></path>
+											<path d="M28 16H14V18H28V16Z" fill="#434343"></path>
+											<path
+													d="M32 6H10C8.9 6 8 6.9 8 8V40C8 41.1 8.9 42 10 42H32C33.1 42 34 41.1 34 40V8C34 6.9 33.1 6 32 6ZM32 8V22H10V8H32ZM10 40V24H32V40H10Z"
+													fill="#434343"></path>
+											<path d="M23 26H19V28H23V26Z" fill="#434343"></path>
+											<path d="M42 23H36V25H42V23Z" fill="#434343"></path>
+											<path d="M41 36H39C39 34.35 37.65 33 36 33V31C38.76 31 41 33.24 41 36Z"
+												  fill="#434343"></path>
+											<path d="M36 17V15C37.65 15 39 13.65 39 12H41C41 14.76 38.76 17 36 17Z"
+												  fill="#434343"></path>
+										</svg>
+									</div>
+									<p>에어컨</p>
+								</div>
+							</li>
+							<!-- 에어컨 끝 -->
+						</ul>
 					</div>
-					<ul class="y-lists">
-						<li>
-							<div class="y-list-title">
-								<p th:text="${maemulList.tradeType}"></p>
-							</div>
-							<div class="y-list-content">
-								<p th:if="${maemulList.tradeType == '매매'}"
-								   th:with="sp_djr=${maemulList.sellingPrice / 10000}, sp_aks=${maemulList.sellingPrice % 10000}"
-								   th:text="${#strings.concat(sp_djr > 0 ? sp_djr + '억 ' : '', sp_aks > 0 ? sp_aks + '만원' : '')}">
-								</p>
-								<p th:if="${maemulList.tradeType == '전세'}"
-								   th:with="dp_djr=${maemulList.depositForLease / 10000}, dp_aks=${maemulList.depositForLease % 10000}"
-								   th:text="${#strings.concat(dp_djr > 0 ? dp_djr + '억 ' : '', dp_aks > 0 ? dp_aks + '만원' : '')}">
-								</p>
-								<p th:if="${maemulList.tradeType == '월세'}"
-								   th:with="mr_djr=${maemulList.monthlyRent / 10000}, mr_aks=${maemulList.monthlyRent % 10000}, mfr_djr=${maemulList.monthlyForRent / 10000}, mfr_aks=${maemulList.monthlyForRent % 10000}"
-								   th:text="${'월세 ' + #strings.concat(mfr_djr > 0 ? mfr_djr + '억 ' : '', mfr_aks > 0 ? mfr_aks + '/' : '')} + ${#strings.concat(mr_djr > 0 ? mr_djr + '억 ' : '', mr_aks > 0 ? mr_aks : '')}">
+					<!-- 옵션 끝 -->
 
+					<!-- 보안/안전시설 시작 -->
+					<div class="y-information-price safety">
+						<div class="y-info-header">
+							<p>보안/안전시설</p>
+						</div>
+						<div th:if="${maemulList == null or maemulList?.security == null or maemulList.security.isEmpty()}"
+							 class="">
+							등록되어 있는 보안/안전시설이 없어요!
+						</div>
+						<ul th:if="${maemulList != null and maemulList.security != null and not maemulList.security.isEmpty()}"
+							class="y-lists y-option">
+
+							<!-- 현관보안 -->
+							<li th:if="${maemulList.security.contains('현관보안')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path
+													d="M37.99 10V38H9.98999V10H37.99ZM37.99 8H9.98999C8.88999 8 7.98999 8.9 7.98999 10V38C7.98999 39.1 8.88999 40 9.98999 40H37.99C39.09 40 39.99 39.1 39.99 38V10C39.99 8.9 39.09 8 37.99 8Z"
+													fill="#434343"></path>
+											<path d="M27.99 24H25.99V26H27.99V24Z" fill="#434343"></path>
+											<path d="M35.99 24H33.99V26H35.99V24Z" fill="#434343"></path>
+											<path d="M31.99 24H29.99V26H31.99V24Z" fill="#434343"></path>
+											<path d="M27.99 28H25.99V30H27.99V28Z" fill="#434343"></path>
+											<path d="M35.99 28H33.99V30H35.99V28Z" fill="#434343"></path>
+											<path d="M31.99 28H29.99V30H31.99V28Z" fill="#434343"></path>
+											<path d="M27.99 32H25.99V34H27.99V32Z" fill="#434343"></path>
+											<path d="M35.99 32H33.99V34H35.99V32Z" fill="#434343"></path>
+											<path d="M31.99 32H29.99V34H31.99V32Z" fill="#434343"></path>
+											<path
+													d="M30.99 16C31.54 16 31.99 16.45 31.99 17C31.99 17.55 31.54 18 30.99 18C30.44 18 29.99 17.55 29.99 17C29.99 16.45 30.44 16 30.99 16ZM30.99 14C29.34 14 27.99 15.35 27.99 17C27.99 18.65 29.34 20 30.99 20C32.64 20 33.99 18.65 33.99 17C33.99 15.35 32.64 14 30.99 14Z"
+													fill="#434343"></path>
+											<path
+													d="M22.62 19.44L20.62 18.77L18.62 18.1L17.99 17.89L17.36 18.1L15.36 18.77L13.36 19.44L11.99 19.9V24.12C11.99 27.37 14.68 30.01 17.99 30.01C21.3 30.01 23.99 27.37 23.99 24.12V19.9L22.62 19.44ZM17.32 24C17.32 23.63 17.62 23.33 17.99 23.33C18.36 23.33 18.66 23.63 18.66 24C18.66 24.37 18.36 24.67 17.99 24.67C17.62 24.67 17.32 24.37 17.32 24ZM21.99 24.11C21.99 25.92 20.71 27.43 18.99 27.86V26.47C19.97 26.07 20.66 25.12 20.66 24C20.66 22.53 19.46 21.33 17.99 21.33C16.52 21.33 15.32 22.53 15.32 24C15.32 25.12 16.01 26.07 16.99 26.47V27.86C15.27 27.43 13.99 25.92 13.99 24.11V21.33L15.99 20.66L17.99 19.99L19.99 20.66L21.99 21.33V24.11Z"
+													fill="#434343"></path>
+										</svg>
+									</div>
+									<p>현관보안</p>
+								</div>
+							</li>
+							<!-- 현관보안 끝 -->
+
+							<!-- CCTV -->
+							<li th:if="${maemulList.security.contains('CCTV')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path
+													d="M24 22C26.21 22 28 23.79 28 26C28 28.21 26.21 30 24 30C21.79 30 20 28.21 20 26C20 23.79 21.79 22 24 22ZM24 20C20.69 20 18 22.69 18 26C18 29.31 20.69 32 24 32C27.31 32 30 29.31 30 26C30 22.69 27.31 20 24 20Z"
+													fill="#434343"></path>
+											<path d="M34 18H30V20H34V18Z" fill="#434343"></path>
+											<path d="M25 25H23V27H25V25Z" fill="#434343"></path>
+											<path
+													d="M38 10H6V12H10V24C10 31.72 16.28 38 24 38C31.72 38 38 31.72 38 24V12H42V10H38ZM36 24C36 30.63 30.63 36 24 36C17.37 36 12 30.63 12 24V16H36V24ZM36 14H12V12H36V14Z"
+													fill="#434343"></path>
+										</svg>
+									</div>
+									<p>CCTV</p>
+								</div>
+							</li>
+							<!-- CCTV 끝 -->
+
+							<!-- 방범창 -->
+							<li th:if="${maemulList.security.contains('방범창')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path
+													d="M39.99 10H5.98999V16H9.98999V32H5.98999V38H41.99V32H37.99V16H41.99V10H39.99ZM35.99 12V14H31.49V12H35.99ZM29.49 12V14H24.99V12H29.49ZM24.99 16H29.49V32H24.99V16ZM22.99 32H18.49V16H22.99V32ZM22.99 12V14H18.49V12H22.99ZM16.49 12V14H11.99V12H16.49ZM7.98999 14V12H9.98999V14H7.98999ZM11.99 16H16.49V32H11.99V16ZM7.98999 36V34H9.98999V36H7.98999ZM11.99 36V34H16.49V36H11.99ZM18.49 36V34H22.99V36H18.49ZM24.99 36V34H29.49V36H24.99ZM31.49 36V34H35.99V36H31.49ZM39.99 34V36H37.99V34H39.99ZM35.99 32H31.49V16H35.99V32ZM39.99 14H37.99V12H39.99V14Z"
+													fill="#434343"></path>
+										</svg>
+									</div>
+									<p>방범창</p>
+								</div>
+							</li>
+							<!-- 방범창 끝 -->
+
+							<!-- 경비원 -->
+							<li th:if="${maemulList.security.contains('경비원')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path d="M21.99 28H19.99V30H21.99V28Z" fill="#434343"></path>
+											<path d="M27.99 28H25.99V30H27.99V28Z" fill="#434343"></path>
+											<path
+													d="M23.99 36C21.78 36 19.99 34.21 19.99 32H21.99C21.99 33.1 22.89 34 23.99 34C25.09 34 25.99 33.1 25.99 32H27.99C27.99 34.21 26.2 36 23.99 36Z"
+													fill="#434343"></path>
+											<path
+													d="M35.44 20H35.98V10.65L34.72 10.15L29.72 8.14999L24.72 6.14999L23.98 5.85001L23.24 6.14999L18.24 8.14999L13.24 10.15L11.98 10.65V20H12.54C10.9 22.34 9.98999 25.12 9.98999 28C9.98999 35.72 16.27 42 23.99 42C31.71 42 37.99 35.72 37.99 28C37.99 25.12 37.09 22.34 35.44 20ZM13.98 12L18.98 10L23.98 8L28.98 10L33.98 12V18H13.98V12ZM31.98 20C30.16 22.43 27.26 24 23.99 24C20.72 24 17.82 22.43 16 20H31.98ZM23.99 40C17.36 40 11.99 34.63 11.99 28C11.99 25.38 12.84 22.97 14.27 21C16.45 24.02 19.99 26 23.99 26C27.99 26 31.53 24.02 33.71 21C35.14 22.97 35.99 25.38 35.99 28C35.99 34.63 30.62 40 23.99 40Z"
+													fill="#434343"></path>
+											<path
+													d="M23.99 13C24.54 13 24.99 13.45 24.99 14C24.99 14.55 24.54 15 23.99 15C23.44 15 22.99 14.55 22.99 14C22.99 13.45 23.44 13 23.99 13ZM23.99 11C22.34 11 20.99 12.35 20.99 14C20.99 15.65 22.34 17 23.99 17C25.64 17 26.99 15.65 26.99 14C26.99 12.35 25.64 11 23.99 11Z"
+													fill="#434343"></path>
+										</svg>
+									</div>
+									<p>경비원</p>
+								</div>
+							</li>
+							<!-- 경비원 끝 -->
+
+							<!-- 화재경보기 -->
+							<li th:if="${maemulList.security.contains('화재경보기')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path
+													d="M35.99 8V40H11.99V8H35.99ZM35.99 6H11.99C10.89 6 9.98999 6.9 9.98999 8V40C9.98999 41.1 10.89 42 11.99 42H35.99C37.09 42 37.99 41.1 37.99 40V8C37.99 6.9 37.09 6 35.99 6Z"
+													fill="#434343"></path>
+											<path
+													d="M23.99 23.98C27.3 23.98 29.99 26.67 29.99 29.98C29.99 33.29 27.3 35.98 23.99 35.98C20.68 35.98 17.99 33.29 17.99 29.98C17.99 26.67 20.68 23.98 23.99 23.98ZM23.99 21.98C19.58 21.98 15.99 25.57 15.99 29.98C15.99 34.39 19.58 37.98 23.99 37.98C28.4 37.98 31.99 34.39 31.99 29.98C31.99 25.57 28.4 21.98 23.99 21.98Z"
+													fill="#434343"></path>
+											<path
+													d="M23.99 12.02C25.65 12.02 26.99 13.36 26.99 15.02C26.99 16.68 25.65 18.02 23.99 18.02C22.33 18.02 20.99 16.68 20.99 15.02C20.99 13.36 22.33 12.02 23.99 12.02ZM23.99 10.02C21.23 10.02 18.99 12.26 18.99 15.02C18.99 17.78 21.23 20.02 23.99 20.02C26.75 20.02 28.99 17.78 28.99 15.02C28.99 12.26 26.75 10.02 23.99 10.02Z"
+													fill="#434343"></path>
+											<path
+													d="M23.99 28.98C24.54 28.98 24.99 29.43 24.99 29.98C24.99 30.53 24.54 30.98 23.99 30.98C23.44 30.98 22.99 30.53 22.99 29.98C22.99 29.43 23.44 28.98 23.99 28.98ZM23.99 26.98C22.34 26.98 20.99 28.33 20.99 29.98C20.99 31.63 22.34 32.98 23.99 32.98C25.64 32.98 26.99 31.63 26.99 29.98C26.99 28.33 25.64 26.98 23.99 26.98Z"
+													fill="#434343"></path>
+										</svg>
+									</div>
+									<p>화재경보기</p>
+								</div>
+							</li>
+							<!-- 화재경보기 끝 -->
+
+							<!-- 비디오폰 -->
+							<li th:if="${maemulList.security.contains('비디오폰')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path d="M24.99 10H22.99V12H24.99V10Z" fill="#434343"></path>
+											<path d="M17.98 36H15.98V38H17.98V36Z" fill="#434343"></path>
+											<path d="M24.99 36H22.99V38H24.99V36Z" fill="#434343"></path>
+											<path d="M31.99 36H29.99V38H31.99V36Z" fill="#434343"></path>
+											<path
+													d="M35.99 6H11.99C10.89 6 9.98999 6.9 9.98999 8V40C9.98999 41.1 10.89 42 11.99 42H35.99C37.09 42 37.99 41.1 37.99 40V8C37.99 6.9 37.09 6 35.99 6ZM35.99 40H11.99V16H35.99V40ZM35.99 14H11.99V8H35.99V14Z"
+													fill="#434343"></path>
+											<path
+													d="M23.99 20C27.3 20 29.99 22.69 29.99 26C29.99 29.31 27.3 32 23.99 32C20.68 32 17.99 29.31 17.99 26C17.99 22.69 20.68 20 23.99 20ZM23.99 18C19.58 18 15.99 21.59 15.99 26C15.99 30.41 19.58 34 23.99 34C28.4 34 31.99 30.41 31.99 26C31.99 21.59 28.4 18 23.99 18Z"
+													fill="#434343"></path>
+											<path d="M22.99 24H20.99V26H22.99V24Z" fill="#434343"></path>
+											<path d="M26.99 24H24.99V26H26.99V24Z" fill="#434343"></path>
+											<path d="M23.99 30C22.89 30 21.99 29.1 21.99 28H25.99C25.99 29.1 25.09 30 23.99 30Z"
+												  fill="#434343"></path>
+										</svg>
+									</div>
+									<p>비디오폰</p>
+								</div>
+							</li>
+							<!-- 비디오폰 끝 -->
+
+							<!-- 인터폰 -->
+							<li th:if="${maemulList.security.contains('인터폰')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path d="M25.99 22H23.99V24H25.99V22Z" fill="#434343"></path>
+											<path d="M33.99 22H31.99V24H33.99V22Z" fill="#434343"></path>
+											<path d="M29.99 22H27.99V24H29.99V22Z" fill="#434343"></path>
+											<path d="M25.99 26H23.99V28H25.99V26Z" fill="#434343"></path>
+											<path d="M33.99 26H31.99V28H33.99V26Z" fill="#434343"></path>
+											<path d="M29.99 26H27.99V28H29.99V26Z" fill="#434343"></path>
+											<path d="M25.99 30H23.99V32H25.99V30Z" fill="#434343"></path>
+											<path d="M33.99 30H31.99V32H33.99V30Z" fill="#434343"></path>
+											<path d="M29.99 30H27.99V32H29.99V30Z" fill="#434343"></path>
+											<path
+													d="M37.99 8H9.98999C8.88999 8 7.98999 8.9 7.98999 10V38C7.98999 39.1 8.88999 40 9.98999 40H37.99C39.09 40 39.99 39.1 39.99 38V10C39.99 8.9 39.09 8 37.99 8ZM9.98999 38V10H17.99V38H9.98999ZM37.99 38H19.99V10H37.99V38Z"
+													fill="#434343"></path>
+											<path d="M33.99 16H23.99V18H33.99V16Z" fill="#434343"></path>
+										</svg>
+									</div>
+									<p>인터폰</p>
+								</div>
+							</li>
+							<!-- 인터폰 끝 -->
+
+							<!-- 카드키 -->
+							<li th:if="${maemulList.security.contains('카드키')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path d="M18 12H16V14H18V12Z" fill="#434343"></path>
+											<path d="M23 12H21V14H23V12Z" fill="#434343"></path>
+											<path d="M28 12H26V14H28V12Z" fill="#434343"></path>
+											<path d="M18 17H16V19H18V17Z" fill="#434343"></path>
+											<path d="M23 17H21V19H23V17Z" fill="#434343"></path>
+											<path d="M28 17H26V19H28V17Z" fill="#434343"></path>
+											<path d="M18 22H16V24H18V22Z" fill="#434343"></path>
+											<path d="M23 22H21V24H23V22Z" fill="#434343"></path>
+											<path d="M28 22H26V24H28V22Z" fill="#434343"></path>
+											<path
+													d="M38 34H34V8C34 6.9 33.1 6 32 6H12C10.9 6 10 6.9 10 8V40C10 41.1 10.9 42 12 42H32C33.1 42 34 41.1 34 40V36H38V34ZM12 8H32V28H12V8ZM32 40H12V30H32V34H16V36H32V40Z"
+													fill="#434343"></path>
+										</svg>
+									</div>
+									<p>카드키</p>
+								</div>
+							</li>
+							<!-- 카드키 끝 -->
+
+							<!-- 사설경비 -->
+							<li th:if="${maemulList.security.contains('사설경비')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path
+													d="M23.9899 20L25.2899 22.63L28.1999 23.05L26.0999 25.1L26.5999 27.99L23.9999 26.62L21.3999 27.99L21.8999 25.1L19.7999 23.05L22.7099 22.63L24.0099 20M24.0099 18C23.2499 18 22.5499 18.43 22.2199 19.11L21.3899 20.8L19.5199 21.07C18.7699 21.18 18.1399 21.71 17.9099 22.43C17.6699 23.15 17.8699 23.95 18.4199 24.48L19.7699 25.8L19.4499 27.66C19.3199 28.41 19.6299 29.17 20.2499 29.62C20.5999 29.87 21.0099 30 21.4299 30C21.7499 30 22.0699 29.92 22.3599 29.77L24.0299 28.89L25.6999 29.77C25.9899 29.92 26.3099 30 26.6299 30C27.0399 30 27.4599 29.87 27.8099 29.62C28.4299 29.17 28.7299 28.41 28.6099 27.66L28.2899 25.8L29.6399 24.48C30.1899 23.95 30.3799 23.15 30.1499 22.43C29.9099 21.71 29.2899 21.18 28.5399 21.07L26.6699 20.8L25.8399 19.11C25.4999 18.43 24.8099 18 24.0499 18H24.0099Z"
+													fill="#434343"></path>
+											<path
+													d="M38.54 12.08L31.54 10.08L24.54 8.07999C24.36 8.02999 24.18 8 23.99 8C23.8 8 23.62 8.02999 23.44 8.07999L16.44 10.08L9.43999 12.08C8.57999 12.33 7.98999 13.11 7.98999 14V24C7.98999 32.82 15.17 40 23.99 40C32.81 40 39.99 32.82 39.99 24V14C39.99 13.11 39.4 12.32 38.54 12.08ZM23.99 38C16.26 38 9.98999 31.73 9.98999 24V17.95H13.98V15.95H9.98999V14L16.99 12L23.99 10L30.99 12L37.99 14V15.95H33.98V17.95H37.99V24C37.99 31.73 31.72 38 23.99 38Z"
+													fill="#434343"></path>
+										</svg>
+									</div>
+									<p>사설경비</p>
+								</div>
+							</li>
+							<!-- 사설경비 끝 -->
+
+							<!-- 전자도어락 -->
+							<li th:if="${maemulList.security.contains('전자도어락')}">
+								<div class="y-z-option-list">
+									<div class="y-z-option-list2">
+										<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
+											 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+											<path d="M18 12H16V14H18V12Z" fill="#434343"></path>
+											<path d="M23 12H21V14H23V12Z" fill="#434343"></path>
+											<path d="M28 12H26V14H28V12Z" fill="#434343"></path>
+											<path d="M18 17H16V19H18V17Z" fill="#434343"></path>
+											<path d="M23 17H21V19H23V17Z" fill="#434343"></path>
+											<path d="M28 17H26V19H28V17Z" fill="#434343"></path>
+											<path d="M18 22H16V24H18V22Z" fill="#434343"></path>
+											<path d="M23 22H21V24H23V22Z" fill="#434343"></path>
+											<path d="M28 22H26V24H28V22Z" fill="#434343"></path>
+											<path
+													d="M38 34H34V8C34 6.9 33.1 6 32 6H12C10.9 6 10 6.9 10 8V40C10 41.1 10.9 42 12 42H32C33.1 42 34 41.1 34 40V36H38V34ZM12 8H32V28H12V8ZM32 40H12V30H32V34H16V36H32V40Z"
+													fill="#434343"></path>
+										</svg>
+									</div>
+									<p>전자도어락</p>
+								</div>
+							</li>
+							<!-- 전자도어락 끝 -->
+						</ul>
+					</div>
+					<!-- 보안/안전시설 끝 -->
+
+					<!-- 위치 및 주변 시설 시작 -->
+					<div class="y-information-price around">
+						<div class="y-info-header">
+							<p>위치 및 주변 시설</p>
+						</div>
+						<div class="y-ar-title">
+							<p>위치 : [[${maemulList.address}]]</p>
+						</div>
+						<!--			<div class="y-map" id="map"></div>-->
+						<div class="map_wrap">
+							<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
+
+						</div>
+
+						<!-- 편의시설 안전시설 학군정보 nav 시작 -->
+						<div class="y-map-list-con">
+
+							<div class="y-map-list y-qq">
+								<button>
+									<p class="y-firstq">
+										편의시설
+										<i class="fa-solid fa-building-columns"></i>
+									</p>
+								</button>
+							</div>
+						</div>
+						<!-- 편의시설 안전시설 학군정보 nav 끝 -->
+
+						<div class="y-map-icon-con" id="category">
+							<!-- 편의 시설 wrap -->
+							<!-- 지하철역 시작 -->
+							<div class="y-map-btn y-j-subway" id="SW8" data-order="0">
+								<button class="y-ibtn">
+									<i data-testid="IconComponent" class="y-station"></i>
+									<span class="category_bg bank"></span>
+									<p>지하철역</p>
+								</button>
+							</div>
+							<!-- 지하철역 끝 -->
+
+							<!-- 편의점 시작 -->
+							<div class="y-map-btn y-j-convenience" id="CS2" data-order="5">
+								<button class="y-ibtn">
+									<i data-testid="IconComponent" class="y-store"></i>
+									<p>편의점</p>
+								</button>
+							</div>
+							<!-- 편의점 끝 -->
+
+							<!-- 카페 시작 -->
+							<div class="y-map-btn y-j-cafe" id="CE7" data-order="4">
+								<button class="y-ibtn">
+									<i data-testid="IconComponent" class="y-cafe"></i>
+									<p>카페</p>
+								</button>
+							</div>
+							<!-- 카페 끝 -->
+
+							<!-- 은행 시작 -->
+							<div class="y-map-btn y-j-bank" id="BK9" data-order="0">
+								<button class="y-ibtn">
+									<i data-testid="IconComponent" class="y-bank"></i>
+									<p>은행</p>
+								</button>
+							</div>
+							<!-- 은행 끝 -->
+
+		<!--					&lt;!&ndash; 어린이집 시작 &ndash;&gt;-->
+		<!--					<div class="y-map-btn y-school-district" id="PS3" data-order="2">-->
+		<!--						<button class="y-ibtn" >-->
+		<!--							<i data-testid="IconComponent" class="y-daycare"></i>-->
+		<!--							<p>어린이집 / 유치원</p>-->
+		<!--						</button>-->
+		<!--					</div>-->
+		<!--					&lt;!&ndash; 어린이집 끝 &ndash;&gt;-->
+
+							<!-- 병원 시작 -->
+							<div class="y-map-btn y-j-hospital" id="HP8" data-order="2">
+								<button class="y-ibtn">
+									<i class="fa-regular fa-hospital fa-lg y-fa y-hospital" style="color: #ffffff;"></i>
+									<p>병원</p>
+								</button>
+							</div>
+							<!-- 병원 끝 -->
+
+							<!-- 주유소 시작 -->
+							<div class="y-map-btn y-j-gas-staion" id="OL7" data-order="3">
+								<button class="y-ibtn">
+									<i class="fa-solid fa-gas-pump fa-lg y-fa y-gas-station" style="color: #ffffff;"></i>
+									<p>주유소</p>
+								</button>
+							</div>
+							<!-- 주유소 끝 -->
+							<!-- 편의 시설 wrap끝 -->
+
+		<!--					&lt;!&ndash; 안전 시설 wrap 시작 &ndash;&gt;-->
+		<!--					&lt;!&ndash; 치안 시작 &ndash;&gt;-->
+		<!--					<div class="y-map-btn y-no-active y-safety-district">-->
+		<!--						<button class="y-ibtn">-->
+		<!--							<i data-testid="IconComponent" class="y-safety"></i>-->
+		<!--							<p>치안</p>-->
+		<!--						</button>-->
+		<!--					</div>-->
+		<!--					&lt;!&ndash; 치안 끝 &ndash;&gt;-->
+
+		<!--					&lt;!&ndash; CCTV 시작 &ndash;&gt;-->
+		<!--					<div class="y-map-btn y-no-active y-safety-district">-->
+		<!--						<button class="y-ibtn">-->
+		<!--							<i data-testid="IconComponent" class="y-cctv"></i>-->
+		<!--							<p>CCTV</p>-->
+		<!--						</button>-->
+		<!--					</div>-->
+		<!--					&lt;!&ndash; CCTV 끝 &ndash;&gt;-->
+		<!--					&lt;!&ndash; 안전 시설 wrap 끝 &ndash;&gt;-->
+
+		<!--					&lt;!&ndash; 학군 정보 wrap 시작 &ndash;&gt;-->
+
+
+		<!--					&lt;!&ndash; 유치원 시작 &ndash;&gt;-->
+		<!--					<div class="y-map-btn y-no-active y-school-district">-->
+		<!--						<button class="y-ibtn">-->
+		<!--							<i data-testid="IconComponent" class="y-kinder-garden"></i>-->
+		<!--							<p>유치원</p>-->
+		<!--						</button>-->
+		<!--					</div>-->
+		<!--					&lt;!&ndash; 유치원 끝 &ndash;&gt;-->
+
+		<!--					&lt;!&ndash; 초등학교 시작 &ndash;&gt;-->
+		<!--					<div class="y-map-btn y-no-active y-school-district">-->
+		<!--						<button class="y-ibtn">-->
+		<!--							<i data-testid="IconComponent" class="y-elementary"></i>-->
+		<!--							<p>초등학교</p>-->
+		<!--						</button>-->
+		<!--					</div>-->
+		<!--					&lt;!&ndash; 초등학교 끝 &ndash;&gt;-->
+
+		<!--					&lt;!&ndash; 중학교 시작 &ndash;&gt;-->
+		<!--					<div class="y-map-btn y-no-active y-school-district">-->
+		<!--						<button class="y-ibtn">-->
+		<!--							<i data-testid="IconComponent" class="y-middle"></i>-->
+		<!--							<p>중학교</p>-->
+		<!--						</button>-->
+		<!--					</div>-->
+		<!--					&lt;!&ndash; 중학교 끝 &ndash;&gt;-->
+
+		<!--					&lt;!&ndash; 고등학교 시작 &ndash;&gt;-->
+		<!--					<div class="y-map-btn y-no-active y-school-district">-->
+		<!--						<button class="y-ibtn">-->
+		<!--							<i data-testid="IconComponent" class="y-high"></i>-->
+		<!--							<p>고등학교</p>-->
+		<!--						</button>-->
+		<!--					</div>-->
+		<!--					&lt;!&ndash; 고등학교 끝 &ndash;&gt;-->
+		<!--					&lt;!&ndash; 학군 정보 wrap 끝 &ndash;&gt;-->
+
+						</div>
+					</div>
+					<!-- 위치 및 주변 시설 끝 -->
+
+					<!-- 상세설명 시작 -->
+					<div class="y-information-price y-detail">
+						<div class="y-info-header">
+							<p>상세설명</p>
+						</div>
+
+						<div class="y-text-cont">
+							<pre>
+		<p>
+		<strong>[[${maemulList.title}]]</strong>
+
+		[[${maemulList.content}]]
+		</p>
+							</pre>
+						</div>
+
+					</div>
+					<!-- 상세설명 끝 -->
+
+					<!-- 매물 관심 현황 시작 -->
+					<div class="y-information-price y-present">
+						<div class="y-info-header">
+							<p>매물 관심 현황</p>
+						</div>
+						<div class="y-text-cont">
+							<div class="y-inter-q">
+								<div class="y-interest-status">
+									<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+										 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+										<path fill-rule="evenodd" clip-rule="evenodd"
+											  d="M19 10.5C19 5.80558 15.1944 2 10.5 2C5.80558 2 2 5.80558 2 10.5C2 15.1944 5.80558 19 10.5 19C12.6676 19 14.6457 18.1887 16.1471 16.8531L21.0553 21.7624L21.1246 21.8203C21.3195 21.9553 21.5889 21.936 21.7624 21.7624C21.9577 21.5672 21.9577 21.2506 21.7624 21.0553L16.8531 16.1471C18.1887 14.6457 19 12.6676 19 10.5ZM3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5Z"
+											  fill="white"></path>
+									</svg>
+								</div>
+								<strong>매물확인</strong>
+								<p>
+									<b>72</b>
+									명
 								</p>
 							</div>
-						</li>
-						<li>
-							<div class="y-list-title">
-								<p>융자금</p>
-							</div>
-							<div class="y-list-content">
-								<p th:if="${maemulList.loanAmount == 0}">-</p>
-								<p th:unless="${maemulList.loanAmount == 0}">[[${maemulList.loanAmount}]]</p>
-							</div>
-						</li>
-						<li>
-							<div class="y-list-title">
-								<p>관리비</p>
-							</div>
-							<div class="y-list-content">
-								<p th:unless="${maemulList.managementFee == 0}">매월
-									[[${maemulList.managementFee}]] 만원</p>
-								<p th:if="${maemulList.managementFee == 0}">-</p>
-							</div>
-						</li>
-						<li>
-							<div class="y-list-title">
-								<p>주차가능여부</p>
-							</div>
-							<div class="y-list-content">
-								<p th:if="${maemulList.totalParking != 0}">가능</p>
-								<p th:if="${maemulList.totalParking == 0}">불가능</p>
-							</div>
-						</li>
-						<li>
-							<div class="y-list-title">
-								<p>단기임대</p>
-							</div>
-							<div class="y-list-content">
-								<p th:if="${maemulList.shortTermRental.equals('가능')}">가능</p>
-								<p th:if="${maemulList.shortTermRental.equals('불가능')}">불가능</p>
-							</div>
-						</li>
-						<li th:unless="${maemulList.monthlyRent == 0}">
-							<div class="y-list-title">
-								<p>한달 예상 주거비용</p>
-							</div>
-							<div class="y-list-content">
-								<div class="y-blue-text">
-									<strong>[[${maemulList.monthlyRent + maemulList.managementFee}]]만원
-										+a</strong>
-								</div>
-								<div class="y-monthly-pay">
-									<p>월세 + 관리비</p>
-								</div>
-								<div class="y-explain">
-									<p>별도 금액으로 부과되는 항목 제외</p>
-								</div>
-							</div>
-						</li>
-					</ul>
+						</div>
+						<p class="y-7day">*최근 7일 기준</p>
+
+					</div>
+					<!-- 매물 관심 현황 끝 -->
+
+					<!-- 추천 매물 시작 -->
+					<!-- 추천 매물 끝 -->
+
+					<!-- 비대면 계약 규정 안내 시작 -->
+					<div class="y-non-face-to-face-rule-con">
+						<div class="y-face-box">
+							<strong>
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
+									<circle cx="12" cy="12" r="9" fill="#EDEDED"></circle>
+									<path fill-rule="evenodd" clip-rule="evenodd"
+										  d="M11.5081 13.0899C11.5504 13.3231 11.7546 13.5 12 13.5C12.2762 13.5 12.5 13.2761 12.5 13V8.5L12.492 8.41012C12.4496 8.17688 12.2455 8 12 8C11.7239 8 11.5 8.22386 11.5 8.5V13L11.5081 13.0899ZM12 16.2C12.3314 16.2 12.6 15.9314 12.6 15.6C12.6 15.2686 12.3314 15 12 15C11.6687 15 11.4 15.2686 11.4 15.6C11.4 15.9314 11.6687 16.2 12 16.2Z"
+										  fill="#222222"></path>
+								</svg>
+								비대면 계약 규정 안내
+							</strong>
+							<p>-임대인이 승낙하기 전까지 '나의 비대면 계약'에서 직접 계약 요청 취소가 가능합니다.</p>
+							<p>-계약 진행중에도 임대인,중개사와 합의하여 담당 중개사를 통해 계약 취소가 가능합니다.</p>
+							<p>-계약금/잔금 등 송금에 대한 확인은 담당 중개사가 시행하며, 송금의 지연 및 누락 등에 관련한 문제에 당사는 관여하지 않습니다.</p>
+						</div>
+					</div>
+					<!-- 비대면 계약 규정 안내 끝 -->
 				</div>
-				<!-- 가격 정보 끝 -->
+				<!-- y-bigbig-con 끝 -->
 
-			</div>
+			</div><!-- setgrid -->
 			<aside>
 				<div class="y-st">
 					<div class="y-sticky-first-con">
@@ -307,8 +1297,8 @@
 											  fill="#222222"></path>
 									</svg>
 									<span>
-                                        [[${maemulList.privateArea}]]㎡
-								</span>
+												[[${maemulList.privateArea}]]㎡
+										</span>
 								</div>
 							</li>
 							<li>
@@ -330,10 +1320,10 @@
 											  fill="#222222"></path>
 									</svg>
 									<span>
-									<p th:if="${maemulList.managementFee == 0}" th:text="없음"></p>
-									<p th:if="${maemulList.managementFee != 0}"
-									   th:text="${maemulList.managementFee + '만원'}"></p>
-								</span>
+											<p th:if="${maemulList.managementFee == 0}" th:text="없음"></p>
+											<p th:if="${maemulList.managementFee != 0}"
+											   th:text="${maemulList.managementFee + '만원'}"></p>
+										</span>
 
 								</div>
 							</li>
@@ -401,992 +1391,7 @@
 					</div>
 				</div>
 			</aside>
-			<!-- y-bu-con 사진 아래에 내용 적는 컨테이너 시작 끝 -->
-			<div class="y-information-price">
-				<div class="y-info-header">
-					<p>상세정보</p>
-				</div>
-				<ul class="y-lists">
-					<li>
-						<div class="y-list-title">
-							<p>방종류</p>
-						</div>
-						<div class="y-list-content">
-							<p>원룸(분리형)</p>
-						</div>
-					</li>
-					<li>
-						<div class="y-list-title">
-							<p>해당층/건물층</p>
-						</div>
-						<div class="y-list-content">
-							<p>[[${maemulList.floorNumber}]]층/[[${maemulList.totalFloors}]]층</p>
-						</div>
-					</li>
-					<li>
-						<div class="y-list-title">
-							<p>전용/공급면적</p>
-						</div>
-						<div class="y-list-content">
-							<p>[[${maemulList.privateArea}]]㎡/[[${maemulList.supplyArea}]]㎡</p>
-						</div>
-					</li>
-					<li>
-						<div class="y-list-title">
-							<p>방 수/욕실 수</p>
-						</div>
-						<div class="y-list-content">
-							<p>[[${maemulList.numberOfRooms}]]개/[[${maemulList.numberOfBathrooms}]]개</p>
-						</div>
-					</li>
-					<li>
-						<div class="y-list-title">
-							<p>방향</p>
-						</div>
-						<div class="y-list-content y-yt">
-							<p>
-								[[${maemulList.direction}]]
-							</p>
-							<p class=" y-rjtlf">거실 기준</p>
-						</div>
-					</li>
-					<li>
-						<div class="y-list-title">
-							<p>난방종류</p>
-						</div>
-						<div class="y-list-content">
-							<p>[[${maemulList.heatingType}]]</p>
-						</div>
-					</li>
-					<li>
-						<div class="y-list-title">
-							<p>엘리베이터</p>
-						</div>
-						<div class="y-list-content">
-							<p th:if="${maemulList.elevator.contains('유')}">있음</p>
-							<p th:if="${maemulList.elevator.contains('무')}">있음</p>
-						</div>
-					</li>
-					<li th:if="${maemulList.totalParking != 0}">
-						<div class="y-list-title">
-							<p>총 주차대수</p>
-						</div>
-						<div class="y-list-content">
-							<p>총 [[${maemulList.totalParking}]]대</p>
-						</div>
-					</li>
-					<li>
-						<div class="y-list-title">
-							<p>입주가능일</p>
-						</div>
-						<div class="y-list-content">
-							<!-- <p>즉시 입주</p>-->
-							<p>[[${maemulList.availableMoveInDate}]]</p>
-						</div>
-					</li>
-					<li>
-						<div class="y-list-title">
-							<p>건축물용도</p>
-						</div>
-						<div class="y-list-content">
-							<p>[[${maemulList.buildingUsage}]]</p>
-						</div>
-					</li>
-					<li>
-						<div class="y-list-title">
-							<p>매물등록일</p>
-						</div>
-						<div class="y-list-content">
-							<td th:text="${#temporals.format(maemulList.createdAt, 'yyyy-MM-dd')}">yyyy-MM-dd</td>
-						</div>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<!-- y-second-con 두 번째 컨테이너 끝 -->
-
-		<!-- 옵션 시작 -->
-		<!-- y-bigbig-con 시작 -->
-		<div class="y-bigbig-con">
-			<div class="y-information-price option">
-				<div class="y-info-header">
-					<p>옵션</p>
-				</div>
-				<div th:if="${maemulList == null or maemulList?.optional == null or maemulList.optional.isEmpty()}"
-					 class="">
-					등록되어 있는 옵션이 없어요!
-				</div>
-				<ul th:if="${maemulList != null and maemulList.optional != null and not maemulList.optional.isEmpty()}"
-					class="y-lists y-option">
-					<!-- 벽걸이형 -->
-					<li th:if="${maemulList.optional.contains('벽걸이형')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path d="M25 34H23V40H25V34Z" fill="#434343"></path>
-									<path d="M12 39V37C13.65 37 15 35.65 15 34H17C17 36.76 14.76 39 12 39Z"
-										  fill="#434343"></path>
-									<path d="M36 39C33.24 39 31 36.76 31 34H33C33 35.65 34.35 37 36 37V39Z"
-										  fill="#434343"></path>
-									<path
-											d="M40 10H8C6.9 10 6 10.9 6 12V30C6 31.1 6.9 32 8 32H40C41.1 32 42 31.1 42 30V12C42 10.9 41.1 10 40 10ZM14 30V28H34V30H14ZM40 30H36V26H12V30H8V24H40V30ZM40 22H8V12H40V22Z"
-											fill="#434343"></path>
-									<path d="M13.97 14H11.97V16H13.97V14Z" fill="#434343"></path>
-									<path d="M13.97 17.99H11.97V19.99H13.97V17.99Z" fill="#434343"></path>
-									<path d="M35.97 17.99H31.97V19.99H35.97V17.99Z" fill="#434343"></path>
-								</svg>
-
-							</div>
-							<p>벽걸이형</p>
-						</div>
-					</li>
-					<!-- 벽걸이형 끝 -->
-
-					<!-- 침대 -->
-					<li th:if="${maemulList.optional.contains('침대')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path
-											d="M35.98 6H11.99C10.88 6 9.97998 6.9 9.97998 8V40C9.97998 41.1 10.88 42 11.99 42H35.98C37.09 42 37.99 41.1 37.99 40V8C37.99 6.9 37.09 6 35.98 6ZM35.98 40H11.99V24H35.98V40ZM35.98 22H11.99V18H35.98V22ZM24.99 12H31.99V16H24.99V12ZM22.99 16H15.99V12H22.99V16ZM35.98 16H33.99V10H13.99V16H12V8H35.99V16H35.98Z"
-											fill="#434343"></path>
-								</svg>
-							</div>
-							<p>침대</p>
-						</div>
-					</li>
-					<!-- 침대 끝 -->
-
-					<!-- 책상 -->
-					<li th:if="${maemulList.optional.contains('책상')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path d="M33.99 20H31.99V21.99H33.99V20Z" fill="#434343"></path>
-									<path
-											d="M40.99 10H6.98999C6.43999 10 5.98999 10.45 5.98999 11V38H7.98999V18H23.99V34.02H39.99V38H41.99V11C41.99 10.45 41.54 10 40.99 10ZM39.99 32.02H25.99V26.02H39.99V32.02ZM39.99 24.02H25.99V18.02H39.99V24.02ZM39.99 16H7.98999V12H39.99V16Z"
-											fill="#434343"></path>
-									<path d="M33.99 28.01H31.99V30H33.99V28.01Z" fill="#434343"></path>
-								</svg>
-							</div>
-							<p>책상</p>
-						</div>
-					</li>
-					<!-- 책상 끝 -->
-
-					<!-- 옷장 -->
-					<li th:if="${maemulList.optional.contains('옷장')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path
-											d="M36 6H12C10.9 6 10 6.9 10 8V36C10 37.1 10.9 38 12 38V42H14V38H34V42H36V38C37.1 38 38 37.1 38 36V8C38 6.9 37.1 6 36 6ZM22 36H12V26H22V36ZM22 24H12V20H22V24ZM22 18H12V14H22V18ZM22 12H12V8H22V12ZM36 36H24V8H36V36Z"
-											fill="#434343"></path>
-									<path d="M28 20H26V24H28V20Z" fill="#434343"></path>
-								</svg>
-							</div>
-							<p>옷장</p>
-						</div>
-					</li>
-					<!-- 옷장 끝 -->
-
-					<!-- 식탁 -->
-					<li th:if="${maemulList.optional.contains('식탁')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path
-											d="M40.16 10.02L40.18 10H7.83L7.85 10.02C6.82 10.1 6 10.95 6 12V16C6 17.1 6.9 18 8 18H10V38H12V30H36V38H38V18H40C41.1 18 42 17.1 42 16V12C42 10.95 41.19 10.1 40.16 10.02ZM30.6 16L30.36 16.21L29.5 17L24 22L19.6 18L19.26 17.69L18.5 17L17.64 16.21L17.4 16L13 12H35L30.6 16ZM10 16H8V12H10.03L11.66 13.48L14.43 16H12H10ZM36 28H12V18H16.63L17.16 18.48L22.66 23.48L24.01 24.7L25.36 23.48L30.86 18.48L31.39 18H36.01V28H36ZM40 16H38H36H33.58L36.35 13.48L37.98 12H40V16Z"
-											fill="#434343"></path>
-								</svg>
-							</div>
-							<p>식탁</p>
-						</div>
-					</li>
-					<!-- 식탁 끝 -->
-
-					<!-- 소파 -->
-					<li th:if="${maemulList.optional.contains('소파')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path
-											d="M41.99 24C41.99 21.79 40.2 20 37.99 20V16C37.99 12.69 35.3 10 31.99 10H15.99C12.68 10 9.98999 12.69 9.98999 16V20C7.77999 20 5.98999 21.79 5.98999 24C5.98999 24.73 6.19999 25.41 6.54999 26H5.98999V34H9.98999V38H11.99V34H35.99V38H37.99V34H41.99V26H41.43C41.77 25.41 41.99 24.73 41.99 24ZM39.99 24C39.99 25.1 39.09 26 37.99 26C36.89 26 35.99 25.1 35.99 24C35.99 23.59 36.12 23.2 36.33 22.88C36.47 22.67 36.66 22.48 36.87 22.34C37.19 22.12 37.57 22 37.99 22C39.09 22 39.99 22.9 39.99 24ZM11.99 16C11.99 13.79 13.78 12 15.99 12H31.99C34.2 12 35.99 13.79 35.99 16V20.56C34.8 21.25 33.99 22.53 33.99 24C33.99 24.73 34.2 25.41 34.55 26H13.44C13.78 25.41 14 24.73 14 24C14 22.53 13.19 21.25 12 20.56V16H11.99ZM9.98999 22C10.4 22 10.79 22.13 11.11 22.34C11.22 22.41 11.32 22.49 11.41 22.58C11.5 22.67 11.58 22.77 11.65 22.88C11.87 23.2 11.99 23.58 11.99 24C11.99 25.1 11.09 26 9.98999 26C8.88999 26 7.98999 25.1 7.98999 24C7.98999 22.9 8.88999 22 9.98999 22ZM39.99 32H7.98999V28H22.99V32H24.99V28H39.99V32Z"
-											fill="#434343"></path>
-								</svg>
-							</div>
-							<p>소파</p>
-						</div>
-					</li>
-					<!-- 소파 끝 -->
-
-					<!-- 천장형에어컨 -->
-					<li th:if="${maemulList.optional.contains('천장형에어컨')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path
-											d="M35.99 8V32H11.99V8H35.99ZM35.99 6H11.99C10.89 6 9.98999 6.9 9.98999 8V32C9.98999 33.1 10.89 34 11.99 34H35.99C37.09 34 37.99 33.1 37.99 32V8C37.99 6.9 37.09 6 35.99 6Z"
-											fill="#434343"></path>
-									<path d="M27.99 16V24H19.99V16H27.99ZM29.99 14H17.99V26H29.99V14Z" fill="#434343">
-									</path>
-									<path d="M24.99 36H22.99V42H24.99V36Z" fill="#434343"></path>
-									<path
-											d="M11.99 41V39C13.64 39 14.99 37.65 14.99 36H16.99C16.99 38.76 14.75 41 11.99 41Z"
-											fill="#434343"></path>
-									<path
-											d="M35.99 41C33.23 41 30.99 38.76 30.99 36H32.99C32.99 37.65 34.34 39 35.99 39V41Z"
-											fill="#434343"></path>
-									<path d="M29.99 10H17.99V12H29.99V10Z" fill="#434343"></path>
-									<path d="M29.99 28H17.99V30H29.99V28Z" fill="#434343"></path>
-									<path d="M33.99 26V14H31.99V26H33.99Z" fill="#434343"></path>
-									<path d="M15.99 26V14H13.99V26H15.99Z" fill="#434343"></path>
-								</svg>
-							</div>
-							<p>천장형에어컨</p>
-						</div>
-					</li>
-					<!-- 천장형에어컨 끝 -->
-
-					<!-- 무인택배함 -->
-					<li th:if="${maemulList.optional.contains('무인택배함')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path
-											d="M34 8H8V34H19.92H21.99V32H19.92C16.61 32 13.3 32 10 32V10H18V20H26V10H34V22H36V8H34ZM24 18H20V10H24V18Z"
-											fill="#434343"></path>
-									<path
-											d="M32 25.97C35.31 25.97 38 28.66 38 31.97C38 35.28 35.31 37.97 32 37.97C28.69 37.97 26 35.28 26 31.97C26 28.66 28.69 25.97 32 25.97ZM32 23.97C27.59 23.97 24 27.56 24 31.97C24 36.38 27.59 39.97 32 39.97C36.41 39.97 40 36.38 40 31.97C40 27.56 36.41 23.97 32 23.97Z"
-											fill="#434343"></path>
-									<path d="M36 32.97H31V27.97H33V30.97H36V32.97Z" fill="#434343"></path>
-								</svg>
-							</div>
-							<p>무인택배함</p>
-						</div>
-					</li>
-					<!-- 무인택배함 끝 -->
-
-					<!-- 비데 -->
-					<li th:if="${maemulList.optional.contains('비데')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path
-											d="M35.99 6V20H23.99V16C23.99 14.9 24.89 14 25.99 14C27.09 14 27.99 14.9 27.99 16H29.99C29.99 13.79 28.2 12 25.99 12C24.79 12 23.72 12.54 22.99 13.38C22.26 12.54 21.19 12 19.99 12C17.78 12 15.99 13.79 15.99 16H17.99C17.99 14.9 18.89 14 19.99 14C21.09 14 21.99 14.9 21.99 16V20H9.98999C8.88999 20 7.98999 20.9 7.98999 22C7.98999 27.51 12.78 32 18.66 32H21.99V42H37.99V6H35.99ZM35.99 40H23.99V32H35.99V40ZM23.99 30H18.66C13.87 30 9.98999 26.42 9.98999 22H35.99V30H23.99Z"
-											fill="#434343"></path>
-								</svg>
-							</div>
-							<p>비데</p>
-						</div>
-					</li>
-					<!-- 비데 끝 -->
-
-					<!-- 신발장 -->
-					<li th:if="${maemulList.optional.contains('신발장')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path
-											d="M32.81 22H27.99V12C27.99 10.9 27.09 10 25.99 10H7.98999C6.88999 10 5.98999 10.9 5.98999 12V36C5.98999 37.1 6.88999 38 7.98999 38H39.99C41.09 38 41.99 37.1 41.99 36V32C41.99 26.49 37.87 22 32.81 22ZM21.99 12H25.99V14V15.99H21.99V12ZM7.98999 26C11.3 26 13.99 28.69 13.99 32H7.98999V26ZM39.99 36H7.98999V34H39.99V36ZM15.99 32C15.99 27.59 12.4 24 7.98999 24V12H19.99V15.99V17.99H25.99V20.02H19.99V22.02H25.99V23C25.99 23.55 26.44 24 26.99 24H32.81C36.77 24 39.99 27.59 39.99 32H15.99Z"
-											fill="#434343"></path>
-								</svg>
-							</div>
-							<p>신발장</p>
-						</div>
-					</li>
-					<!-- 신발장 끝 -->
-
-					<!-- 냉장고 -->
-					<li th:if="${maemulList.optional.contains('냉장고')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path
-											d="M35.99 6H11.99C10.89 6 9.98999 6.9 9.98999 8V40C9.98999 41.1 10.89 42 11.99 42H35.99C37.09 42 37.99 41.1 37.99 40V8C37.99 6.9 37.09 6 35.99 6ZM35.99 40H11.99V22H35.99V40ZM35.99 20H11.99V8H35.99V20Z"
-											fill="#434343"></path>
-									<path d="M17.99 12H15.99V15.99H17.99V12Z" fill="#434343"></path>
-									<path d="M17.99 26.01H15.99V30H17.99V26.01Z" fill="#434343"></path>
-								</svg>
-							</div>
-							<p>냉장고</p>
-						</div>
-					</li>
-					<!-- 냉장고 끝 -->
-
-					<!-- 세탁기 -->
-					<li th:if="${maemulList.optional.contains('세탁기')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path d="M34 12H30V14H34V12Z" fill="#434343"></path>
-									<path d="M16 12H14V14H16V12Z" fill="#434343"></path>
-									<path d="M20 12H18V14H20V12Z" fill="#434343"></path>
-									<path
-											d="M38 8H10C8.9 8 8 8.9 8 10V38C8 39.1 8.9 40 10 40H38C39.1 40 40 39.1 40 38V10C40 8.9 39.1 8 38 8ZM38 38H10V18H38V38ZM38 16H10V10H38V16Z"
-											fill="#434343"></path>
-									<path
-											d="M24 20C19.59 20 16 23.59 16 28C16 32.41 19.59 36 24 36C28.41 36 32 32.41 32 28C32 23.59 28.41 20 24 20ZM24 22C26.97 22 29.43 24.16 29.91 27H18.09C18.57 24.16 21.03 22 24 22ZM24 34C21.03 34 18.57 31.84 18.09 29H29.91C29.43 31.84 26.97 34 24 34Z"
-											fill="#434343"></path>
-								</svg>
-							</div>
-							<p>세탁기</p>
-						</div>
-					</li>
-					<!-- 세탁기 끝 -->
-
-					<!-- 샤워부스 -->
-					<li th:if="${maemulList.optional.contains('샤워부스')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path d="M19.99 20H17.99V22H19.99V20Z" fill="#434343"></path>
-									<path d="M19.99 28H17.99V30H19.99V28Z" fill="#434343"></path>
-									<path d="M29.99 20H27.99V22H29.99V20Z" fill="#434343"></path>
-									<path d="M29.99 28H27.99V30H29.99V28Z" fill="#434343"></path>
-									<path d="M21.99 15.99H19.99V17.99H21.99V15.99Z" fill="#434343"></path>
-									<path d="M27.99 15.99H25.99V17.99H27.99V15.99Z" fill="#434343"></path>
-									<path d="M21.99 24H19.99V26H21.99V24Z" fill="#434343"></path>
-									<path d="M27.99 24H25.99V26H27.99V24Z" fill="#434343"></path>
-									<path d="M24.99 20H22.99V22H24.99V20Z" fill="#434343"></path>
-									<path d="M24.99 28H22.99V30H24.99V28Z" fill="#434343"></path>
-									<path
-											d="M35.95 6H12.03C10.93 6 10.03 6.9 10.03 8V40C10.03 41.1 10.93 42 12.03 42H35.95C37.05 42 37.95 41.1 37.95 40V8C37.95 6.9 37.05 6 35.95 6ZM23 8V12H17.99V14H29.99V12H25V8H35.95V36H12.03V8H22.99H23ZM12.04 40V38H35.96V40H12.04Z"
-											fill="#434343"></path>
-								</svg>
-							</div>
-							<p>샤워부스</p>
-						</div>
-					</li>
-					<!-- 샤워부스 끝 -->
-
-					<!-- 싱크대 -->
-					<li th:if="${maemulList.optional.contains('싱크대')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path d="M36 18H32V20H36V18Z" fill="#434343"></path>
-									<path d="M36 23H32V25H36V23Z" fill="#434343"></path>
-									<path d="M36 28H32V30H36V28Z" fill="#434343"></path>
-									<path
-											d="M40 10H19.92V8H17.92V10H8C6.9 10 6 10.9 6 12V36C6 37.1 6.9 38 8 38H40C41.1 38 42 37.1 42 36V12C42 10.9 41.1 10 40 10ZM40 36H8V12H17.92V14H9.99V34H27.99V14H19.92V12H40V36ZM19.92 18.02V16H25.99V32H11.99V16H17.92V18.02H19.92Z"
-											fill="#434343"></path>
-									<path
-											d="M15.98 24C15.98 25.65 17.33 27 18.98 27C20.63 27 21.98 25.65 21.98 24C21.98 22.35 20.63 21 18.98 21C17.33 21 15.98 22.35 15.98 24ZM18.98 23C19.53 23 19.98 23.45 19.98 24C19.98 24.55 19.53 25 18.98 25C18.43 25 17.98 24.55 17.98 24C17.98 23.45 18.43 23 18.98 23Z"
-											fill="#434343"></path>
-								</svg>
-							</div>
-							<p>싱크대</p>
-						</div>
-					</li>
-					<!-- 싱크대 끝 -->
-
-					<!-- 인덕션 -->
-					<li th:if="${maemulList.optional.contains('인덕션')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path
-											d="M39.99 12V36H7.98999V12H39.99ZM39.99 10H7.98999C6.88999 10 5.98999 10.9 5.98999 12V36C5.98999 37.1 6.88999 38 7.98999 38H39.99C41.09 38 41.99 37.1 41.99 36V12C41.99 10.9 41.09 10 39.99 10Z"
-											fill="#434343"></path>
-									<path d="M17.99 32H13.99V34H17.99V32Z" fill="#434343"></path>
-									<path d="M33.99 32H29.99V34H33.99V32Z" fill="#434343"></path>
-									<path
-											d="M15.99 16C12.68 16 9.98999 18.69 9.98999 22C9.98999 25.31 12.68 28 15.99 28C19.3 28 21.99 25.31 21.99 22C21.99 18.69 19.3 16 15.99 16ZM16.99 25.86V24H14.99V25.86C13.59 25.5 12.49 24.4 12.13 23H13.99V21H12.13C12.49 19.6 13.59 18.5 14.99 18.14V20H16.99V18.14C18.39 18.5 19.49 19.6 19.85 21H17.99V23H19.85C19.49 24.4 18.39 25.5 16.99 25.86Z"
-											fill="#434343"></path>
-									<path
-											d="M31.99 16C28.68 16 25.99 18.69 25.99 22C25.99 25.31 28.68 28 31.99 28C35.3 28 37.99 25.31 37.99 22C37.99 18.69 35.3 16 31.99 16ZM32.99 25.86V24H30.99V25.86C29.59 25.5 28.49 24.4 28.13 23H29.99V21H28.13C28.49 19.6 29.59 18.5 30.99 18.14V20H32.99V18.14C34.39 18.5 35.49 19.6 35.85 21H33.99V23H35.85C35.49 24.4 34.39 25.5 32.99 25.86Z"
-											fill="#434343"></path>
-								</svg>
-							</div>
-							<p>인덕션</p>
-						</div>
-					</li>
-					<!-- 인덕션 끝 -->
-
-					<!-- 전자레인지 -->
-					<li th:if="${maemulList.optional.contains('전자레인지')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path
-											d="M39.99 12V36H7.98999V12H39.99ZM39.99 10H7.98999C6.88999 10 5.98999 10.9 5.98999 12V36C5.98999 37.1 6.88999 38 7.98999 38H39.99C41.09 38 41.99 37.1 41.99 36V12C41.99 10.9 41.09 10 39.99 10Z"
-											fill="#434343"></path>
-									<path d="M37.01 20H35.01V22H37.01V20Z" fill="#434343"></path>
-									<path d="M37.01 16H35.01V18H37.01V16Z" fill="#434343"></path>
-									<path d="M27.99 22H25.99V26H27.99V22Z" fill="#434343"></path>
-									<path d="M29.99 18V30H11.99V18H29.99ZM31.99 16H9.98999V32H31.99V16Z" fill="#434343">
-									</path>
-								</svg>
-							</div>
-							<p>전자레인지</p>
-						</div>
-					</li>
-					<!-- 전자레인지 끝 -->
-
-					<!-- TV -->
-					<li th:if="${maemulList.optional.contains('TV')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path d="M36 12H34V14H36V12Z" fill="#434343"></path>
-									<path d="M36 16H34V18H36V16Z" fill="#434343"></path>
-									<path
-											d="M38 8H10C8.9 8 8 8.9 8 10V30C8 31.1 8.9 32 10 32H12.97L11.03 39.76L12.97 40.24L15.03 31.99H32.97L35.03 40.24L36.97 39.76L35.03 32H38C39.1 32 40 31.1 40 30V10C40 8.9 39.1 8 38 8ZM38 30H10V10H38V30Z"
-											fill="#434343"></path>
-									<path d="M30 14V26H14V14H30ZM32 12H12V28H32V12Z" fill="#434343"></path>
-								</svg>
-							</div>
-							<p>TV</p>
-						</div>
-					</li>
-					<!-- TV 끝 -->
-
-					<!-- 붙박이장 -->
-					<li th:if="${maemulList.optional.contains('붙박이장')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path
-											d="M36 6H12C10.9 6 10 6.9 10 8V40C10 41.1 10.9 42 12 42H36C37.1 42 38 41.1 38 40V8C38 6.9 37.1 6 36 6ZM12 8H23V14H12V8ZM12 16H23V22H12V16ZM12 40V24H23V40H12ZM36 40H25V8H36V40Z"
-											fill="#434343"></path>
-									<path d="M29.9902 22H27.9902V26H29.9902V22Z" fill="#434343"></path>
-								</svg>
-							</div>
-							<p>붙박이장</p>
-						</div>
-					</li>
-					<!-- 붙박이장 끝 -->
-
-					<!-- 에어컨 -->
-					<li th:if="${maemulList.optional.contains('에어컨')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path d="M28 12H14V14H28V12Z" fill="#434343"></path>
-									<path d="M28 16H14V18H28V16Z" fill="#434343"></path>
-									<path
-											d="M32 6H10C8.9 6 8 6.9 8 8V40C8 41.1 8.9 42 10 42H32C33.1 42 34 41.1 34 40V8C34 6.9 33.1 6 32 6ZM32 8V22H10V8H32ZM10 40V24H32V40H10Z"
-											fill="#434343"></path>
-									<path d="M23 26H19V28H23V26Z" fill="#434343"></path>
-									<path d="M42 23H36V25H42V23Z" fill="#434343"></path>
-									<path d="M41 36H39C39 34.35 37.65 33 36 33V31C38.76 31 41 33.24 41 36Z"
-										  fill="#434343"></path>
-									<path d="M36 17V15C37.65 15 39 13.65 39 12H41C41 14.76 38.76 17 36 17Z"
-										  fill="#434343"></path>
-								</svg>
-							</div>
-							<p>에어컨</p>
-						</div>
-					</li>
-					<!-- 에어컨 끝 -->
-				</ul>
-			</div>
-			<!-- 옵션 끝 -->
-
-			<!-- 보안/안전시설 시작 -->
-			<div class="y-information-price safety">
-				<div class="y-info-header">
-					<p>보안/안전시설</p>
-				</div>
-				<div th:if="${maemulList == null or maemulList?.security == null or maemulList.security.isEmpty()}"
-					 class="">
-					등록되어 있는 보안/안전시설이 없어요!
-				</div>
-				<ul th:if="${maemulList != null and maemulList.security != null and not maemulList.security.isEmpty()}"
-					class="y-lists y-option">
-
-					<!-- 현관보안 -->
-					<li th:if="${maemulList.security.contains('현관보안')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path
-											d="M37.99 10V38H9.98999V10H37.99ZM37.99 8H9.98999C8.88999 8 7.98999 8.9 7.98999 10V38C7.98999 39.1 8.88999 40 9.98999 40H37.99C39.09 40 39.99 39.1 39.99 38V10C39.99 8.9 39.09 8 37.99 8Z"
-											fill="#434343"></path>
-									<path d="M27.99 24H25.99V26H27.99V24Z" fill="#434343"></path>
-									<path d="M35.99 24H33.99V26H35.99V24Z" fill="#434343"></path>
-									<path d="M31.99 24H29.99V26H31.99V24Z" fill="#434343"></path>
-									<path d="M27.99 28H25.99V30H27.99V28Z" fill="#434343"></path>
-									<path d="M35.99 28H33.99V30H35.99V28Z" fill="#434343"></path>
-									<path d="M31.99 28H29.99V30H31.99V28Z" fill="#434343"></path>
-									<path d="M27.99 32H25.99V34H27.99V32Z" fill="#434343"></path>
-									<path d="M35.99 32H33.99V34H35.99V32Z" fill="#434343"></path>
-									<path d="M31.99 32H29.99V34H31.99V32Z" fill="#434343"></path>
-									<path
-											d="M30.99 16C31.54 16 31.99 16.45 31.99 17C31.99 17.55 31.54 18 30.99 18C30.44 18 29.99 17.55 29.99 17C29.99 16.45 30.44 16 30.99 16ZM30.99 14C29.34 14 27.99 15.35 27.99 17C27.99 18.65 29.34 20 30.99 20C32.64 20 33.99 18.65 33.99 17C33.99 15.35 32.64 14 30.99 14Z"
-											fill="#434343"></path>
-									<path
-											d="M22.62 19.44L20.62 18.77L18.62 18.1L17.99 17.89L17.36 18.1L15.36 18.77L13.36 19.44L11.99 19.9V24.12C11.99 27.37 14.68 30.01 17.99 30.01C21.3 30.01 23.99 27.37 23.99 24.12V19.9L22.62 19.44ZM17.32 24C17.32 23.63 17.62 23.33 17.99 23.33C18.36 23.33 18.66 23.63 18.66 24C18.66 24.37 18.36 24.67 17.99 24.67C17.62 24.67 17.32 24.37 17.32 24ZM21.99 24.11C21.99 25.92 20.71 27.43 18.99 27.86V26.47C19.97 26.07 20.66 25.12 20.66 24C20.66 22.53 19.46 21.33 17.99 21.33C16.52 21.33 15.32 22.53 15.32 24C15.32 25.12 16.01 26.07 16.99 26.47V27.86C15.27 27.43 13.99 25.92 13.99 24.11V21.33L15.99 20.66L17.99 19.99L19.99 20.66L21.99 21.33V24.11Z"
-											fill="#434343"></path>
-								</svg>
-							</div>
-							<p>현관보안</p>
-						</div>
-					</li>
-					<!-- 현관보안 끝 -->
-
-					<!-- CCTV -->
-					<li th:if="${maemulList.security.contains('CCTV')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path
-											d="M24 22C26.21 22 28 23.79 28 26C28 28.21 26.21 30 24 30C21.79 30 20 28.21 20 26C20 23.79 21.79 22 24 22ZM24 20C20.69 20 18 22.69 18 26C18 29.31 20.69 32 24 32C27.31 32 30 29.31 30 26C30 22.69 27.31 20 24 20Z"
-											fill="#434343"></path>
-									<path d="M34 18H30V20H34V18Z" fill="#434343"></path>
-									<path d="M25 25H23V27H25V25Z" fill="#434343"></path>
-									<path
-											d="M38 10H6V12H10V24C10 31.72 16.28 38 24 38C31.72 38 38 31.72 38 24V12H42V10H38ZM36 24C36 30.63 30.63 36 24 36C17.37 36 12 30.63 12 24V16H36V24ZM36 14H12V12H36V14Z"
-											fill="#434343"></path>
-								</svg>
-							</div>
-							<p>CCTV</p>
-						</div>
-					</li>
-					<!-- CCTV 끝 -->
-
-					<!-- 방범창 -->
-					<li th:if="${maemulList.security.contains('방범창')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path
-											d="M39.99 10H5.98999V16H9.98999V32H5.98999V38H41.99V32H37.99V16H41.99V10H39.99ZM35.99 12V14H31.49V12H35.99ZM29.49 12V14H24.99V12H29.49ZM24.99 16H29.49V32H24.99V16ZM22.99 32H18.49V16H22.99V32ZM22.99 12V14H18.49V12H22.99ZM16.49 12V14H11.99V12H16.49ZM7.98999 14V12H9.98999V14H7.98999ZM11.99 16H16.49V32H11.99V16ZM7.98999 36V34H9.98999V36H7.98999ZM11.99 36V34H16.49V36H11.99ZM18.49 36V34H22.99V36H18.49ZM24.99 36V34H29.49V36H24.99ZM31.49 36V34H35.99V36H31.49ZM39.99 34V36H37.99V34H39.99ZM35.99 32H31.49V16H35.99V32ZM39.99 14H37.99V12H39.99V14Z"
-											fill="#434343"></path>
-								</svg>
-							</div>
-							<p>방범창</p>
-						</div>
-					</li>
-					<!-- 방범창 끝 -->
-
-					<!-- 경비원 -->
-					<li th:if="${maemulList.security.contains('경비원')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path d="M21.99 28H19.99V30H21.99V28Z" fill="#434343"></path>
-									<path d="M27.99 28H25.99V30H27.99V28Z" fill="#434343"></path>
-									<path
-											d="M23.99 36C21.78 36 19.99 34.21 19.99 32H21.99C21.99 33.1 22.89 34 23.99 34C25.09 34 25.99 33.1 25.99 32H27.99C27.99 34.21 26.2 36 23.99 36Z"
-											fill="#434343"></path>
-									<path
-											d="M35.44 20H35.98V10.65L34.72 10.15L29.72 8.14999L24.72 6.14999L23.98 5.85001L23.24 6.14999L18.24 8.14999L13.24 10.15L11.98 10.65V20H12.54C10.9 22.34 9.98999 25.12 9.98999 28C9.98999 35.72 16.27 42 23.99 42C31.71 42 37.99 35.72 37.99 28C37.99 25.12 37.09 22.34 35.44 20ZM13.98 12L18.98 10L23.98 8L28.98 10L33.98 12V18H13.98V12ZM31.98 20C30.16 22.43 27.26 24 23.99 24C20.72 24 17.82 22.43 16 20H31.98ZM23.99 40C17.36 40 11.99 34.63 11.99 28C11.99 25.38 12.84 22.97 14.27 21C16.45 24.02 19.99 26 23.99 26C27.99 26 31.53 24.02 33.71 21C35.14 22.97 35.99 25.38 35.99 28C35.99 34.63 30.62 40 23.99 40Z"
-											fill="#434343"></path>
-									<path
-											d="M23.99 13C24.54 13 24.99 13.45 24.99 14C24.99 14.55 24.54 15 23.99 15C23.44 15 22.99 14.55 22.99 14C22.99 13.45 23.44 13 23.99 13ZM23.99 11C22.34 11 20.99 12.35 20.99 14C20.99 15.65 22.34 17 23.99 17C25.64 17 26.99 15.65 26.99 14C26.99 12.35 25.64 11 23.99 11Z"
-											fill="#434343"></path>
-								</svg>
-							</div>
-							<p>경비원</p>
-						</div>
-					</li>
-					<!-- 경비원 끝 -->
-
-					<!-- 화재경보기 -->
-					<li th:if="${maemulList.security.contains('화재경보기')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path
-											d="M35.99 8V40H11.99V8H35.99ZM35.99 6H11.99C10.89 6 9.98999 6.9 9.98999 8V40C9.98999 41.1 10.89 42 11.99 42H35.99C37.09 42 37.99 41.1 37.99 40V8C37.99 6.9 37.09 6 35.99 6Z"
-											fill="#434343"></path>
-									<path
-											d="M23.99 23.98C27.3 23.98 29.99 26.67 29.99 29.98C29.99 33.29 27.3 35.98 23.99 35.98C20.68 35.98 17.99 33.29 17.99 29.98C17.99 26.67 20.68 23.98 23.99 23.98ZM23.99 21.98C19.58 21.98 15.99 25.57 15.99 29.98C15.99 34.39 19.58 37.98 23.99 37.98C28.4 37.98 31.99 34.39 31.99 29.98C31.99 25.57 28.4 21.98 23.99 21.98Z"
-											fill="#434343"></path>
-									<path
-											d="M23.99 12.02C25.65 12.02 26.99 13.36 26.99 15.02C26.99 16.68 25.65 18.02 23.99 18.02C22.33 18.02 20.99 16.68 20.99 15.02C20.99 13.36 22.33 12.02 23.99 12.02ZM23.99 10.02C21.23 10.02 18.99 12.26 18.99 15.02C18.99 17.78 21.23 20.02 23.99 20.02C26.75 20.02 28.99 17.78 28.99 15.02C28.99 12.26 26.75 10.02 23.99 10.02Z"
-											fill="#434343"></path>
-									<path
-											d="M23.99 28.98C24.54 28.98 24.99 29.43 24.99 29.98C24.99 30.53 24.54 30.98 23.99 30.98C23.44 30.98 22.99 30.53 22.99 29.98C22.99 29.43 23.44 28.98 23.99 28.98ZM23.99 26.98C22.34 26.98 20.99 28.33 20.99 29.98C20.99 31.63 22.34 32.98 23.99 32.98C25.64 32.98 26.99 31.63 26.99 29.98C26.99 28.33 25.64 26.98 23.99 26.98Z"
-											fill="#434343"></path>
-								</svg>
-							</div>
-							<p>화재경보기</p>
-						</div>
-					</li>
-					<!-- 화재경보기 끝 -->
-
-					<!-- 비디오폰 -->
-					<li th:if="${maemulList.security.contains('비디오폰')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path d="M24.99 10H22.99V12H24.99V10Z" fill="#434343"></path>
-									<path d="M17.98 36H15.98V38H17.98V36Z" fill="#434343"></path>
-									<path d="M24.99 36H22.99V38H24.99V36Z" fill="#434343"></path>
-									<path d="M31.99 36H29.99V38H31.99V36Z" fill="#434343"></path>
-									<path
-											d="M35.99 6H11.99C10.89 6 9.98999 6.9 9.98999 8V40C9.98999 41.1 10.89 42 11.99 42H35.99C37.09 42 37.99 41.1 37.99 40V8C37.99 6.9 37.09 6 35.99 6ZM35.99 40H11.99V16H35.99V40ZM35.99 14H11.99V8H35.99V14Z"
-											fill="#434343"></path>
-									<path
-											d="M23.99 20C27.3 20 29.99 22.69 29.99 26C29.99 29.31 27.3 32 23.99 32C20.68 32 17.99 29.31 17.99 26C17.99 22.69 20.68 20 23.99 20ZM23.99 18C19.58 18 15.99 21.59 15.99 26C15.99 30.41 19.58 34 23.99 34C28.4 34 31.99 30.41 31.99 26C31.99 21.59 28.4 18 23.99 18Z"
-											fill="#434343"></path>
-									<path d="M22.99 24H20.99V26H22.99V24Z" fill="#434343"></path>
-									<path d="M26.99 24H24.99V26H26.99V24Z" fill="#434343"></path>
-									<path d="M23.99 30C22.89 30 21.99 29.1 21.99 28H25.99C25.99 29.1 25.09 30 23.99 30Z"
-										  fill="#434343"></path>
-								</svg>
-							</div>
-							<p>비디오폰</p>
-						</div>
-					</li>
-					<!-- 비디오폰 끝 -->
-
-					<!-- 인터폰 -->
-					<li th:if="${maemulList.security.contains('인터폰')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path d="M25.99 22H23.99V24H25.99V22Z" fill="#434343"></path>
-									<path d="M33.99 22H31.99V24H33.99V22Z" fill="#434343"></path>
-									<path d="M29.99 22H27.99V24H29.99V22Z" fill="#434343"></path>
-									<path d="M25.99 26H23.99V28H25.99V26Z" fill="#434343"></path>
-									<path d="M33.99 26H31.99V28H33.99V26Z" fill="#434343"></path>
-									<path d="M29.99 26H27.99V28H29.99V26Z" fill="#434343"></path>
-									<path d="M25.99 30H23.99V32H25.99V30Z" fill="#434343"></path>
-									<path d="M33.99 30H31.99V32H33.99V30Z" fill="#434343"></path>
-									<path d="M29.99 30H27.99V32H29.99V30Z" fill="#434343"></path>
-									<path
-											d="M37.99 8H9.98999C8.88999 8 7.98999 8.9 7.98999 10V38C7.98999 39.1 8.88999 40 9.98999 40H37.99C39.09 40 39.99 39.1 39.99 38V10C39.99 8.9 39.09 8 37.99 8ZM9.98999 38V10H17.99V38H9.98999ZM37.99 38H19.99V10H37.99V38Z"
-											fill="#434343"></path>
-									<path d="M33.99 16H23.99V18H33.99V16Z" fill="#434343"></path>
-								</svg>
-							</div>
-							<p>인터폰</p>
-						</div>
-					</li>
-					<!-- 인터폰 끝 -->
-
-					<!-- 카드키 -->
-					<li th:if="${maemulList.security.contains('카드키')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path d="M18 12H16V14H18V12Z" fill="#434343"></path>
-									<path d="M23 12H21V14H23V12Z" fill="#434343"></path>
-									<path d="M28 12H26V14H28V12Z" fill="#434343"></path>
-									<path d="M18 17H16V19H18V17Z" fill="#434343"></path>
-									<path d="M23 17H21V19H23V17Z" fill="#434343"></path>
-									<path d="M28 17H26V19H28V17Z" fill="#434343"></path>
-									<path d="M18 22H16V24H18V22Z" fill="#434343"></path>
-									<path d="M23 22H21V24H23V22Z" fill="#434343"></path>
-									<path d="M28 22H26V24H28V22Z" fill="#434343"></path>
-									<path
-											d="M38 34H34V8C34 6.9 33.1 6 32 6H12C10.9 6 10 6.9 10 8V40C10 41.1 10.9 42 12 42H32C33.1 42 34 41.1 34 40V36H38V34ZM12 8H32V28H12V8ZM32 40H12V30H32V34H16V36H32V40Z"
-											fill="#434343"></path>
-								</svg>
-							</div>
-							<p>카드키</p>
-						</div>
-					</li>
-					<!-- 카드키 끝 -->
-
-					<!-- 사설경비 -->
-					<li th:if="${maemulList.security.contains('사설경비')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path
-											d="M23.9899 20L25.2899 22.63L28.1999 23.05L26.0999 25.1L26.5999 27.99L23.9999 26.62L21.3999 27.99L21.8999 25.1L19.7999 23.05L22.7099 22.63L24.0099 20M24.0099 18C23.2499 18 22.5499 18.43 22.2199 19.11L21.3899 20.8L19.5199 21.07C18.7699 21.18 18.1399 21.71 17.9099 22.43C17.6699 23.15 17.8699 23.95 18.4199 24.48L19.7699 25.8L19.4499 27.66C19.3199 28.41 19.6299 29.17 20.2499 29.62C20.5999 29.87 21.0099 30 21.4299 30C21.7499 30 22.0699 29.92 22.3599 29.77L24.0299 28.89L25.6999 29.77C25.9899 29.92 26.3099 30 26.6299 30C27.0399 30 27.4599 29.87 27.8099 29.62C28.4299 29.17 28.7299 28.41 28.6099 27.66L28.2899 25.8L29.6399 24.48C30.1899 23.95 30.3799 23.15 30.1499 22.43C29.9099 21.71 29.2899 21.18 28.5399 21.07L26.6699 20.8L25.8399 19.11C25.4999 18.43 24.8099 18 24.0499 18H24.0099Z"
-											fill="#434343"></path>
-									<path
-											d="M38.54 12.08L31.54 10.08L24.54 8.07999C24.36 8.02999 24.18 8 23.99 8C23.8 8 23.62 8.02999 23.44 8.07999L16.44 10.08L9.43999 12.08C8.57999 12.33 7.98999 13.11 7.98999 14V24C7.98999 32.82 15.17 40 23.99 40C32.81 40 39.99 32.82 39.99 24V14C39.99 13.11 39.4 12.32 38.54 12.08ZM23.99 38C16.26 38 9.98999 31.73 9.98999 24V17.95H13.98V15.95H9.98999V14L16.99 12L23.99 10L30.99 12L37.99 14V15.95H33.98V17.95H37.99V24C37.99 31.73 31.72 38 23.99 38Z"
-											fill="#434343"></path>
-								</svg>
-							</div>
-							<p>사설경비</p>
-						</div>
-					</li>
-					<!-- 사설경비 끝 -->
-
-					<!-- 전자도어락 -->
-					<li th:if="${maemulList.security.contains('전자도어락')}">
-						<div class="y-z-option-list">
-							<div class="y-z-option-list2">
-								<svg width="48" height="48" viewbox="0 0 48 48" fill="none"
-									 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-									<path d="M18 12H16V14H18V12Z" fill="#434343"></path>
-									<path d="M23 12H21V14H23V12Z" fill="#434343"></path>
-									<path d="M28 12H26V14H28V12Z" fill="#434343"></path>
-									<path d="M18 17H16V19H18V17Z" fill="#434343"></path>
-									<path d="M23 17H21V19H23V17Z" fill="#434343"></path>
-									<path d="M28 17H26V19H28V17Z" fill="#434343"></path>
-									<path d="M18 22H16V24H18V22Z" fill="#434343"></path>
-									<path d="M23 22H21V24H23V22Z" fill="#434343"></path>
-									<path d="M28 22H26V24H28V22Z" fill="#434343"></path>
-									<path
-											d="M38 34H34V8C34 6.9 33.1 6 32 6H12C10.9 6 10 6.9 10 8V40C10 41.1 10.9 42 12 42H32C33.1 42 34 41.1 34 40V36H38V34ZM12 8H32V28H12V8ZM32 40H12V30H32V34H16V36H32V40Z"
-											fill="#434343"></path>
-								</svg>
-							</div>
-							<p>전자도어락</p>
-						</div>
-					</li>
-					<!-- 전자도어락 끝 -->
-				</ul>
-			</div>
-			<!-- 보안/안전시설 끝 -->
-
-			<!-- 위치 및 주변 시설 시작 -->
-			<div class="y-information-price around">
-				<div class="y-info-header">
-					<p>위치 및 주변 시설</p>
-				</div>
-				<div class="y-ar-title">
-					<p>위치 : [[${maemulList.address}]]</p>
-				</div>
-				<!--			<div class="y-map" id="map"></div>-->
-				<div class="map_wrap">
-					<div id="map" style="width:100%;height:100%;position:relative;overflow:hidden;"></div>
-
-				</div>
-
-				<!-- 편의시설 안전시설 학군정보 nav 시작 -->
-				<div class="y-map-list-con">
-
-					<div class="y-map-list y-qq">
-						<button>
-							<p class="y-firstq">
-								편의시설
-								<i class="fa-solid fa-building-columns"></i>
-							</p>
-						</button>
-					</div>
-				</div>
-				<!-- 편의시설 안전시설 학군정보 nav 끝 -->
-
-				<div class="y-map-icon-con" id="category">
-					<!-- 편의 시설 wrap -->
-					<!-- 지하철역 시작 -->
-					<div class="y-map-btn y-j-subway" id="SW8" data-order="0">
-						<button class="y-ibtn">
-							<i data-testid="IconComponent" class="y-station"></i>
-							<span class="category_bg bank"></span>
-							<p>지하철역</p>
-						</button>
-					</div>
-					<!-- 지하철역 끝 -->
-
-					<!-- 편의점 시작 -->
-					<div class="y-map-btn y-j-convenience" id="CS2" data-order="5">
-						<button class="y-ibtn">
-							<i data-testid="IconComponent" class="y-store"></i>
-							<p>편의점</p>
-						</button>
-					</div>
-					<!-- 편의점 끝 -->
-
-					<!-- 카페 시작 -->
-					<div class="y-map-btn y-j-cafe" id="CE7" data-order="4">
-						<button class="y-ibtn">
-							<i data-testid="IconComponent" class="y-cafe"></i>
-							<p>카페</p>
-						</button>
-					</div>
-					<!-- 카페 끝 -->
-
-					<!-- 은행 시작 -->
-					<div class="y-map-btn y-j-bank" id="BK9" data-order="0">
-						<button class="y-ibtn">
-							<i data-testid="IconComponent" class="y-bank"></i>
-							<p>은행</p>
-						</button>
-					</div>
-					<!-- 은행 끝 -->
-
-<!--					&lt;!&ndash; 어린이집 시작 &ndash;&gt;-->
-<!--					<div class="y-map-btn y-school-district" id="PS3" data-order="2">-->
-<!--						<button class="y-ibtn" >-->
-<!--							<i data-testid="IconComponent" class="y-daycare"></i>-->
-<!--							<p>어린이집 / 유치원</p>-->
-<!--						</button>-->
-<!--					</div>-->
-<!--					&lt;!&ndash; 어린이집 끝 &ndash;&gt;-->
-
-					<!-- 병원 시작 -->
-					<div class="y-map-btn y-j-hospital" id="HP8" data-order="2">
-						<button class="y-ibtn">
-							<i class="fa-regular fa-hospital fa-lg y-fa y-hospital" style="color: #ffffff;"></i>
-							<p>병원</p>
-						</button>
-					</div>
-					<!-- 병원 끝 -->
-
-					<!-- 주유소 시작 -->
-					<div class="y-map-btn y-j-gas-staion" id="OL7" data-order="3">
-						<button class="y-ibtn">
-							<i class="fa-solid fa-gas-pump fa-lg y-fa y-gas-station" style="color: #ffffff;"></i>
-							<p>주유소</p>
-						</button>
-					</div>
-					<!-- 주유소 끝 -->
-					<!-- 편의 시설 wrap끝 -->
-
-<!--					&lt;!&ndash; 안전 시설 wrap 시작 &ndash;&gt;-->
-<!--					&lt;!&ndash; 치안 시작 &ndash;&gt;-->
-<!--					<div class="y-map-btn y-no-active y-safety-district">-->
-<!--						<button class="y-ibtn">-->
-<!--							<i data-testid="IconComponent" class="y-safety"></i>-->
-<!--							<p>치안</p>-->
-<!--						</button>-->
-<!--					</div>-->
-<!--					&lt;!&ndash; 치안 끝 &ndash;&gt;-->
-
-<!--					&lt;!&ndash; CCTV 시작 &ndash;&gt;-->
-<!--					<div class="y-map-btn y-no-active y-safety-district">-->
-<!--						<button class="y-ibtn">-->
-<!--							<i data-testid="IconComponent" class="y-cctv"></i>-->
-<!--							<p>CCTV</p>-->
-<!--						</button>-->
-<!--					</div>-->
-<!--					&lt;!&ndash; CCTV 끝 &ndash;&gt;-->
-<!--					&lt;!&ndash; 안전 시설 wrap 끝 &ndash;&gt;-->
-
-<!--					&lt;!&ndash; 학군 정보 wrap 시작 &ndash;&gt;-->
-
-
-<!--					&lt;!&ndash; 유치원 시작 &ndash;&gt;-->
-<!--					<div class="y-map-btn y-no-active y-school-district">-->
-<!--						<button class="y-ibtn">-->
-<!--							<i data-testid="IconComponent" class="y-kinder-garden"></i>-->
-<!--							<p>유치원</p>-->
-<!--						</button>-->
-<!--					</div>-->
-<!--					&lt;!&ndash; 유치원 끝 &ndash;&gt;-->
-
-<!--					&lt;!&ndash; 초등학교 시작 &ndash;&gt;-->
-<!--					<div class="y-map-btn y-no-active y-school-district">-->
-<!--						<button class="y-ibtn">-->
-<!--							<i data-testid="IconComponent" class="y-elementary"></i>-->
-<!--							<p>초등학교</p>-->
-<!--						</button>-->
-<!--					</div>-->
-<!--					&lt;!&ndash; 초등학교 끝 &ndash;&gt;-->
-
-<!--					&lt;!&ndash; 중학교 시작 &ndash;&gt;-->
-<!--					<div class="y-map-btn y-no-active y-school-district">-->
-<!--						<button class="y-ibtn">-->
-<!--							<i data-testid="IconComponent" class="y-middle"></i>-->
-<!--							<p>중학교</p>-->
-<!--						</button>-->
-<!--					</div>-->
-<!--					&lt;!&ndash; 중학교 끝 &ndash;&gt;-->
-
-<!--					&lt;!&ndash; 고등학교 시작 &ndash;&gt;-->
-<!--					<div class="y-map-btn y-no-active y-school-district">-->
-<!--						<button class="y-ibtn">-->
-<!--							<i data-testid="IconComponent" class="y-high"></i>-->
-<!--							<p>고등학교</p>-->
-<!--						</button>-->
-<!--					</div>-->
-<!--					&lt;!&ndash; 고등학교 끝 &ndash;&gt;-->
-<!--					&lt;!&ndash; 학군 정보 wrap 끝 &ndash;&gt;-->
-
-				</div>
-			</div>
-			<!-- 위치 및 주변 시설 끝 -->
-
-			<!-- 상세설명 시작 -->
-			<div class="y-information-price y-detail">
-				<div class="y-info-header">
-					<p>상세설명</p>
-				</div>
-
-				<div class="y-text-cont">
-                    <pre>
-<p>
-<strong>[[${maemulList.title}]]</strong>
-
-[[${maemulList.content}]]
-</p>
-                    </pre>
-				</div>
-
-			</div>
-			<!-- 상세설명 끝 -->
-
-			<!-- 매물 관심 현황 시작 -->
-			<div class="y-information-price y-present">
-				<div class="y-info-header">
-					<p>매물 관심 현황</p>
-				</div>
-				<div class="y-text-cont">
-					<div class="y-inter-q">
-						<div class="y-interest-status">
-							<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-								 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-								<path fill-rule="evenodd" clip-rule="evenodd"
-									  d="M19 10.5C19 5.80558 15.1944 2 10.5 2C5.80558 2 2 5.80558 2 10.5C2 15.1944 5.80558 19 10.5 19C12.6676 19 14.6457 18.1887 16.1471 16.8531L21.0553 21.7624L21.1246 21.8203C21.3195 21.9553 21.5889 21.936 21.7624 21.7624C21.9577 21.5672 21.9577 21.2506 21.7624 21.0553L16.8531 16.1471C18.1887 14.6457 19 12.6676 19 10.5ZM3 10.5C3 6.35786 6.35786 3 10.5 3C14.6421 3 18 6.35786 18 10.5C18 14.6421 14.6421 18 10.5 18C6.35786 18 3 14.6421 3 10.5Z"
-									  fill="white"></path>
-							</svg>
-						</div>
-						<strong>매물확인</strong>
-						<p>
-							<b>72</b>
-							명
-						</p>
-					</div>
-				</div>
-				<p class="y-7day">*최근 7일 기준</p>
-
-			</div>
-			<!-- 매물 관심 현황 끝 -->
-
-			<!-- 추천 매물 시작 -->
-			<!-- 추천 매물 끝 -->
-
-			<!-- 비대면 계약 규정 안내 시작 -->
-			<div class="y-non-face-to-face-rule-con">
-				<div class="y-face-box">
-					<strong>
-						<svg width="24" height="24" viewBox="0 0 24 24" fill="none"
-							 xmlns="http://www.w3.org/2000/svg" style="flex: 0 0 auto;">
-							<circle cx="12" cy="12" r="9" fill="#EDEDED"></circle>
-							<path fill-rule="evenodd" clip-rule="evenodd"
-								  d="M11.5081 13.0899C11.5504 13.3231 11.7546 13.5 12 13.5C12.2762 13.5 12.5 13.2761 12.5 13V8.5L12.492 8.41012C12.4496 8.17688 12.2455 8 12 8C11.7239 8 11.5 8.22386 11.5 8.5V13L11.5081 13.0899ZM12 16.2C12.3314 16.2 12.6 15.9314 12.6 15.6C12.6 15.2686 12.3314 15 12 15C11.6687 15 11.4 15.2686 11.4 15.6C11.4 15.9314 11.6687 16.2 12 16.2Z"
-								  fill="#222222"></path>
-						</svg>
-						비대면 계약 규정 안내
-					</strong>
-					<p>-임대인이 승낙하기 전까지 '나의 비대면 계약'에서 직접 계약 요청 취소가 가능합니다.</p>
-					<p>-계약 진행중에도 임대인,중개사와 합의하여 담당 중개사를 통해 계약 취소가 가능합니다.</p>
-					<p>-계약금/잔금 등 송금에 대한 확인은 담당 중개사가 시행하며, 송금의 지연 및 누락 등에 관련한 문제에 당사는 관여하지 않습니다.</p>
-				</div>
-			</div>
-			<!-- 비대면 계약 규정 안내 끝 -->
-		</div>
-		<!-- y-bigbig-con 끝 -->
-
+		</div><!-- a_setgridAndAside -->
 	</div>
 	<!-- y-big-con 맨 처음 컨테이너 끝 -->
 

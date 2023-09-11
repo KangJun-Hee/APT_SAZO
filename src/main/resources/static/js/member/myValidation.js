@@ -75,17 +75,25 @@ $(document).ready(function(){
     });
 
     // 비밀번호 표시 미표시 토글
-    $('.form-floating i').on('click',function(){
-        $('#pwd').toggleClass('active');
-        if($('#pwd').hasClass('active')){
-            $(this).attr('class',"fa fa-eye-slash fa-lg")
-            .prev('#pwd').attr('type',"text");
-            $(".form-floating i").css("color","#26ABED");
-        }else{
-            $(this).attr('class',"fa fa-eye fa-lg")
-            .prev('#pwd').attr('type','password');
-            $(".form-floating i").css("color","silver");
-        }
+    $('.form-floating i').on('mousedown', function () {
+        var pwdField = $(this).prev('#pwd');
+
+        // 마우스를 누르면 표시
+        pwdField.attr('type', 'text');
+        $(this).attr('class', 'fa fa-eye-slash fa-lg').css('color', '#26ABED');
+
+        // 마우스 버튼을 놓을 때 다시 비밀번호로 변경
+        $(document).on('mouseup', function () {
+            pwdField.attr('type', 'password');
+            $('.form-floating i').attr('class', 'fa fa-eye fa-lg').css('color', 'silver');
+            $(document).off('mouseup');
+        });
+    });
+
+    // 이메일 입력값 변경 체크
+    $("#email").on("input", function() {
+        $('#btnEmailCheck').attr('class','btn btn-outline-dark');
+        $('#btnEmailCheck').val("중복검사");
     });
 
     // 닉네임 입력값 변경 체크

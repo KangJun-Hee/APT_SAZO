@@ -738,7 +738,7 @@ function updateSidebar(responseData) {
         heartButton.className = "aHeartBtnInList";
         heartButton.innerHTML = `
             <button class="aHeartBtn">
-                <img style="width:15px;margin-bottom:2px;" src="/img/mapDetailAndAPTList/aHeartBtn2.png">
+                <img style="width:15px;margin-bottom:2px;" src="/img/mapDetailAndAPTList/aHeartBtn3.png">
             </button>
         `;
 

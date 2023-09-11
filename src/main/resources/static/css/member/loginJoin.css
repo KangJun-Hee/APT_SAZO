@@ -17,6 +17,12 @@
 }
 
 /* 로그인 */
+.a_logInFormAll{
+    display: flex;
+        flex-direction: column;
+        align-items: center;
+}
+
 .form-check {
     width: 350px;
 }
@@ -52,6 +58,11 @@
 }
 
 /* 회원가입 */
+.a_joinFormAll{
+    display: flex;
+        flex-direction: column;
+        align-items: center;
+}
 #btnEmailCheck, #btnNicknameCheck {
     width: 90px;
     margin-left: 6px;
@@ -62,11 +73,20 @@ agree {
 .oAgree-li {
     margin: 10px;
 }
+.oAgree-li div{
+    display: flex;
+        align-items: center;
+}
+.oMustAgree ,.oAgree{
+    margin-right: 6px;
+}
 .mustch {
+    margin-right: 6px;
     font-weight: 600;
     color: #26ABED;
 }
 .selch {
+    margin-right:6px;
     font-weight: 600;
     color: gray; !important
 }
@@ -90,4 +110,6 @@ i{
     top: 20px;
     color: silver;
     font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
 }

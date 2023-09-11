@@ -41,10 +41,12 @@ li p {
 
 /* y-con 시작 두 번째 컨테이너 여기에 사진이랑 매물 번호 등이 들어감 */
 .y-con {
-	/* border: 1px solid #000; */
-	padding-top: 30px;
-	width: 1200px;
-	margin: 0 auto;
+	display: flex;
+        /* border: 1px solid #000; */
+        padding-top: 30px;
+        width: 1200px;
+        margin: 0 auto;
+        flex-direction: column;
 }
 
 /* y-first-con 시작 사진과 매물을 감싸는 래퍼 컨테이너 */
@@ -200,13 +202,25 @@ aside {
 	background-position: -408px -236px;
 }
 
+.a_setgridAndAside{
+    display:flex;
+    justify-content: space-between;
+}
+
+.a_setGrid{
+    width: 782px;
+}
+
 /* 두 번째 컨테이너 */
 .y-second-con {
 	position: sticky;
-	display: grid;
-	grid-template-columns: 780px 360px;
-	width: 1200px;
-	margin: 0 auto;
+        display: flex;
+        width: 781px;
+        flex-direction: column;
+}
+
+aside {
+    margin-top: 30px;
 }
 
 .y-bu-con {
@@ -311,9 +325,9 @@ aside {
 }
 
 .y-st {
-	position: relative;
-	top: 30px;
-	left: 67px;
+    position: sticky;
+    top: 30px;
+    left: 67px;
 }
 
 .y-sticky-first-con {

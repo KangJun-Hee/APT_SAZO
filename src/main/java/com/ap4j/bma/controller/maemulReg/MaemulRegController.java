@@ -22,6 +22,7 @@ import javax.transaction.Transactional;
 @SessionAttributes({"loginMember", "maemulRegEntity"})
 @Controller
 @Slf4j
+@RequestMapping("/maemul")
 public class MaemulRegController {
 
     @Autowired
@@ -57,7 +58,7 @@ public class MaemulRegController {
     public String saveMaemulInfo(@ModelAttribute MaemulRegEntity maemulRegEntity, Model model) {
         // 매물 정보를 임시로 세션에 저장
         model.addAttribute("maemulRegEntity", maemulRegEntity);
-        return "redirect:/moreinfo";
+        return "redirect:/maemul/moreinfo";
     }
 
     // 상세 정보 입력 페이지
@@ -104,20 +105,18 @@ public class MaemulRegController {
         // 저장된 매물 정보의 ID를 리다이렉트 시에 전달
         redirectAttributes.addAttribute("maemulId", savedEntity.getId());
 
+
+        return "redirect:/maemul/saveCoordinates";
+    }
+    // 매물 좌표 저장
+    @GetMapping("/saveCoordinates")
+    public String maemulSaveCoordinates(@RequestParam("maemulId") Integer maemulId, HttpSession session) {
+        MaemulRegEntity maemulRegEntity = maemulRegService.getMaemulById(maemulId);
+        session.setAttribute("maemulRegEntity", maemulRegEntity);
         return "redirect:/member/qManagement";
     }
-    // 확인 페이지
-    @GetMapping("/confirmation")
-    public String confirmationPage(@RequestParam("maemulId") Integer maemulId, Model model) {
-        // 매물 정보를 데이터베이스에서 가져와서 확인 페이지에 표시
-        MaemulRegEntity maemulRegEntity = maemulRegService.getMaemulById(maemulId);
 
-
-        model.addAttribute("maemulRegEntity", maemulRegEntity);
-        return "/member/qManagement";
-    }
-
-    @PostMapping("/confirmation")
+    @PostMapping("/saveCoordinates")
     public void maemulSaveCoordinates(Integer maemulId, Double latitude, Double longitude) {
         maemulRegService.updateMeamulReg(maemulId, latitude, longitude);
     }

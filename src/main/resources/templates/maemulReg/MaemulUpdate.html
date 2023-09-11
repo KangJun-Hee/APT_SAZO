@@ -14,7 +14,7 @@
 <body layout:fragment="content">
 <!-- 로그인중일때만 접근 가능 -->
 <th:block th:if="${loginMember != null}">                     <!--세션 받아와서 저장-->
-<form action="/update-maemul" method="POST" id="maemulForm" th:object="${loginMember}">
+<form action="/maemul/update-maemul" method="POST" id="maemulForm" th:object="${loginMember}">
 
     <div style="text-align : center;">
         <img src="/img/maemulReg/moreinfo.jpg" style="width:100%; height:100%;" >

@@ -59,12 +59,3 @@ public class MemberDTO {	// 회원가입 폼 입력 정보 담는 DTO
 		memberEntity.setChoice2(this.choice2);
 	}
 }
-
-/*
-@Component
-public class MemberDTO {
-
-	private Long id; // 기본 키 값
-	private String user_id; // 유저 아이디
-}
-*/

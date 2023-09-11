@@ -13,6 +13,16 @@
     <link rel="stylesheet" th:href="@{/css/member/myCommon.css}">
     <link rel="stylesheet" th:href="@{/css/member/myMaemul.css}">
     <link rel="stylesheet" th:href="@{/css/member/pagination.css}">
+    <!-- controller에서 넘겨준 model(maemulRegEntity)를 thymeleaf로 가져온다. -->
+    <script th:inline="javascript">
+    /*<![CDATA[*/
+        var maemulRegEntity = /*[[ ${maemulRegEntity} ]]*/ [];
+        console.log("maemulRegEntity: ", maemulRegEntity);
+    /*]]>*/
+    </script>
+    <!-- 좌표저장 -->
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=40e606b0d3b62e8dc1753ec322a8c92d&libraries=services,clusterer"></script>
+    <script th:src="@{/js/apt/maemulDBCoordinatesSave.js}" type="text/javascript"></script>
 </head>
 <body layout:fragment="content">
     <th:block th:if="${loginMember != null}">
@@ -98,7 +108,7 @@
                                             <td class="o-t-btns">
                                                 <form th:action="@{/member/qDeleteMaemul}" method="POST" onsubmit="return deleteMMCheck()">
                                                     <input type="hidden" id="num" th:name="id" th:value="${mmList.id}">
-                                                    <a th:href="@{/updatePage_maemul(maemul_id=${mmList.id})}">수정</a>
+                                                    <a th:href="@{/maemul/updatePage_maemul(maemul_id=${mmList.id})}">수정</a>
                                                     <input type="submit" value="삭제">
                                                 </form>
                                             </td>

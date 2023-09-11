@@ -114,7 +114,6 @@
 }
 .o-tab-l {
     font-size: 18px;
-    margin-right: 10px;
 }
 .o-tab-r {
     margin-left: auto;
@@ -125,14 +124,14 @@
     text-decoration: none;
 }
 #o-allView {
-    width: 101px;
+    width: 83px;
         background-color: #26abed;
         color: white;
         padding: 5px 8px;
         font-size: 14px;
         display: flex;
         height: 29px;
-        justify-content: space-between;
+        justify-content: center;
 }
 .aSeeAll{
     margin-right: 4px;
@@ -243,11 +242,17 @@
 .oAgree-li {
    margin: 10px;
 }
+.oAgree-li div{
+    display: flex;
+        align-items: center;
+}
 .mustch {
+margin-right: 6px;
    font-weight: 600;
    color: #26ABED;
 }
 .selch {
+    margin-right:6px;
    font-weight: 600;
    color: gray;
 }

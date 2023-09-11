@@ -101,7 +101,7 @@ public class MaemulRegEntity {
     private MemberEntity memberEntity;
 
     //이미지 매핑
-    @OneToMany(mappedBy = "maemulID", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<MaemulPhotoEntity> maemulPhotos = new ArrayList<>();
+//    @OneToMany(mappedBy = "maemulID", cascade = CascadeType.ALL, orphanRemoval = true)
+//    private List<MaemulPhotoEntity> maemulPhotos = new ArrayList<>();
 
 }

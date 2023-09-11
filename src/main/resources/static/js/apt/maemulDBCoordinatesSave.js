@@ -1,6 +1,5 @@
 /** 매물 등록시 도로명 주소 가져와서 자동으로 좌표값 검색후 데이터 베이스에 저장하는 js입니다.  */
-
-document.addEventListener("DOMContentLoaded", function () {
+if(maemulRegEntity != null) {
     var geocoder = new kakao.maps.services.Geocoder();
     var roadName = maemulRegEntity.address;
     var maemulId = maemulRegEntity.id;
@@ -21,29 +20,17 @@ document.addEventListener("DOMContentLoaded", function () {
                     console.log("경도 : " + longitude);
                 // AJAX 요청을 통해 데이터 서버로 전송
                 $.ajax({
-                    url: "/confirmation",
+                    url: "/maemul/saveCoordinates",
                     method: "POST",
                     data: {
                         latitude: latitude,
                         longitude: longitude,
                         maemulId: maemulId
-                    },
-                    success: function(response) {
-                        console.log(latitude);
-                        console.log(longitude);
-                        console.log(maemulId);
-                    },
-                    error: function(error) {
-                        console.log("전송실패");
-                        console.log("HTTP 상태 코드: " + error.status); // HTTP 상태 코드 출력
-                        console.log("오류 메시지: " + error.statusText); // 오류 메시지 출력
-                        console.log("응답 내용: " + error.responseText); // 응답 내용 출력
                     }
                 });
             } else {
                 console.log("데이터 없음");
             }
         });
-
     }
-});
+}
