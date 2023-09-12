@@ -7,36 +7,22 @@
         width : 80%;
         margin : auto;
         margin-top: 40px;
-
         }
-/*
+
         #notice-box{
-                background: #ffffff00;
-                 width: 93%;
+background: #ffffff00;               width: 93%;
                margin: auto;
                margin-top: 105px;
                margin-bottom: 10px;
                border: 1px solid #ddd;
                padding-left: 30px;
-               }
-  */
-
-         #notice-box{
-            height : 100px;
-            background : #f8f8f8;
-            width : 90%;
-            margin: auto;
-            margin-top: 120px;
-            border: 1px solid #ddd;
-            padding-left: 30px;
-            }
 
          }
         .a_info{
-            /*font-weight: 300;*/
+            font-weight: 300;
             display: flex;
             align-items: flex-start;
-            /*font-size: 21px;*/
+            font-size: 21px;
             height: 115px;
             flex-direction: column;
             justify-content: center;
@@ -44,11 +30,11 @@
 
 
         .a_AllInfoBox{
-            margin-top: 20px;
+            margin-top: 73px;
             padding: 0px 32px 0px 32px;
         }
         .guide_ncon {
-            margin-top: 50px;
+            margin-top: 88px;
         }
         h3.guide_title {
             font-weight: 400;
@@ -151,9 +137,4 @@
 
         .train-card:hover{
           transform:translateZ(18px);
-        }
-
-
-        .boldtext{
-        color :#26A9E0;
         }
