@@ -77,7 +77,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     buttonSubmit.addEventListener("click", function () {
         // 사용자 입력 값은 문자열 형태로 받아오기 때문에, parseFloat 함수를 사용하여 숫자로 변환하여 계산에 사용한다.
-
         // 원금
         const principal = parseFloat(inputAmount.value.replace(/,/g, '')); // 쉼표 제거
         // 이자율

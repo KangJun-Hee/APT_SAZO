@@ -13,7 +13,6 @@ public class ApartmentController {
     @Autowired
     ApartmentServiceImpl aptServiceImpl;
 
-
     /** DB에서 js로 데이터 넘겨줘서 좌표 검색하기 (최초 1회 후 DB에 좌표값 저장하면 실행 할 필요 없음)*/
     @GetMapping("/getCoordinates")
     public String aptTransactionTest(Model model) {

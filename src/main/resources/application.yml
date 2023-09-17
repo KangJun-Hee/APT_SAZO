@@ -25,7 +25,7 @@ spring:
   # Hibernate 설정
   jpa:
     hibernate:
-      ddl-auto: none   #update는 삭제한 컬럼 자동생성으로 인한 에러 발생해서 변경
+      ddl-auto: update   #update는 삭제한 컬럼 자동생성으로 인한 에러 발생해서 변경
     properties:
       hibernate:
         format_sql: true
@@ -42,8 +42,8 @@ spring:
 #   데이터베이스 설정
   datasource:
     generate-unique-name: false
-    url: jdbc:mysql://18.219.34.36:3306/bma #공용
-#    url: jdbc:mysql://127.0.0.1:3306/pos #개인
+#    url: jdbc:mysql://18.219.34.36:3306/bma #공용
+    url: jdbc:mysql://127.0.0.1:3306/pos #개인
     username: root
     password: 1234
     driver-class-name: com.mysql.cj.jdbc.Driver

@@ -3,7 +3,6 @@
 
 /** 주소검색 가능하게 해주는 kakaoMapApi 객체 */
 var geocoder = new kakao.maps.services.Geocoder();
-
 var pageSize = 50; // 한 페이지당 처리할 데이터의 개수
 var totalPages = Math.ceil(aptList.length / pageSize); // 전체 페이지 수 계산
 
