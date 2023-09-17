@@ -178,7 +178,7 @@ tr.firstTable{
     height: 20px;
     border: 1px solid lightgray;
     border-radius: 8px;
-    font-size: 14px;
+    font-size: 13px;    /* 폰트사이즈 수정 */
 }
 
 #e-button1 {

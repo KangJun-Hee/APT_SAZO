@@ -5,6 +5,17 @@ body {
     position: relative;
     font-family: 'Noto Sans KR', sans-serif;
 }
+
+/* 위에는 부트스트랩 충돌로 헤더 부분 수정 */
+.n-header-list {
+    margin: 16px 0px;
+    padding: 0px 0px 0px 40px;
+}
+
+.n-header-list li:last-child {
+    padding-right: 10px;
+}
+
 /* 서브 네비게이션바 */
 .o-lnb {
     min-width: 1000px;

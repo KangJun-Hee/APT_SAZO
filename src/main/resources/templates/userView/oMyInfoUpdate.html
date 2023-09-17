@@ -39,9 +39,10 @@
                     </div>
                         <div class="form-floating mb-3 mr-3" id="o-img-c">
                             <div class="oThumbnailImg"> <!-- sns로그인 시 model에서 프로필링크 가져옴, 없으면 default img -->
-                                <img class="myImg" style="width: 100px;" th:if="${thumbnail_image!=null}" th:src="${thumbnail_image}" alt="썸네일이미지">
-                                <img class="myImg" style="width: 100px;" th:if="${thumbnail_image==null}" th:src="@{/img/defaultProfile.jpg}" alt="썸네일이미지">
-                                <div class="mySelImg" id="selectedImage"></div>
+                                <div class="mySelImg" id="selectedImage" name="${thumImgSel}">
+                                    <img class="myImg" th:if="${thumbnail_image!=null}" th:src="${thumbnail_image}" alt="썸네일이미지">
+                                    <img class="myImg" th:if="${thumbnail_image==null}" th:src="@{/img/defaultProfile.jpg}" alt="썸네일이미지">
+                                </div>
                             </div>
                             <div>
                                 <button onclick="" class="aAddPic" id="openModal">

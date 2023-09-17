@@ -143,22 +143,23 @@
                                                               th:text="${'월세 ' + mmList.monthlyForRent + '/' + mmList.monthlyRent}">
                                                         </span>
                                                     </div>
-                                                    <div class="s-mamul-text-1">
-                                                        <p th:text="${mmList.buildingUsage}">용도</p>
-                                                        <p th:text="${' · ' + mmList.address}">주소</p>
-                                                    </div>
-                                                    <div class="s-mamul-text-2">
-                                                        <p th:text="${mmList.privateArea} + '/' + ${mmList.supplyArea} + '㎡ · '">면적</p>
-                                                        <p th:text="${mmList.floorNumber} + '층/' + ${mmList.totalFloors} + '층'">층수</p>
-                                                    </div>
-                                                    <div>
-                                                        <p th:text="${mmList.title}" ></p>
+                                                    <div class="o-mm-text-c">
+                                                        <div class="s-mamul-text-1">
+                                                            <p th:text="${mmList.buildingUsage}">용도</p>
+                                                            <p th:text="${' · ' + mmList.address}">주소</p>
+                                                        </div>
+                                                        <div class="s-mamul-text-2">
+                                                            <p th:text="${mmList.privateArea} + '/' + ${mmList.supplyArea} + '㎡ · '">면적</p>
+                                                            <p th:text="${mmList.floorNumber} + '층/' + ${mmList.totalFloors} + '층'">층수</p>
+                                                        </div>
+                                                        <div>
+                                                            <p th:text="${mmList.title}" ></p>
+                                                        </div>
                                                     </div>
                                                 </div>
                                                 <div class="s-mamul-tag">
-                                                    <span>#반려동물</span>
-                                                    <span>#역세권</span>
-                                                    <span>#주변환경 우수</span>
+                                                    <span th:each="feature, iterStat : ${#strings.arraySplit(mmList.features, ',')}"
+                                                          class="z-text-hash" th:text="${'#' + feature}" th:if="${iterStat.index &lt; 4}"></span>
                                                 </div>
                                             </div>
                                         </div>

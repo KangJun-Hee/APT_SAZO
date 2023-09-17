@@ -37,6 +37,7 @@ position: relative;
 /*로고이미지*/
 .n-header img{
   padding-left: 30px;
+  width:auto;
   height: 40px;
 }
 
@@ -49,6 +50,8 @@ position: relative;
 .n-header-list{
   list-style: none;
 }
+
+
 
 /*
 li 기본값이 하단으로 추가되는걸 가로정렬로 변경

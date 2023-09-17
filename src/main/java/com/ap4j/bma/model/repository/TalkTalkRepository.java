@@ -5,12 +5,16 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface TalkTalkRepository extends JpaRepository<TalkTalkReviewEntity,Integer>{
 
     @Query("select a from TalkTalkReviewEntity a where a.id =?1")
     TalkTalkReviewEntity aptIdtoReview(Long id);
 
+    @Query("SELECT r FROM TalkTalkReviewEntity r ORDER BY r.create_at DESC")
+    List<TalkTalkReviewEntity> findAllDesc();
 
 //    Optional<MemberEntity> findByEmail(String email);   // email로 회원 정보 조회
 //    @Override

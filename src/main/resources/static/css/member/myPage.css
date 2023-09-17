@@ -578,7 +578,7 @@ margin-right: 6px;
     width: 320px;
     height: 195px;
     border: 1px solid #d1dae4;
-    padding: 30px;
+    padding: 25px 30px;
     font-size: 15px;
     display: flex;
     flex-direction: column;
@@ -610,17 +610,20 @@ margin-right: 6px;
 }
 
 .s-mamul-tag {
-    font-size: 13px;
-    margin-top: 5px;
+font-size: 13px;
+    margin: 8px 0px;
 }
 
 .s-mamul-tag span{
-    padding: 5px;
+    padding: 6px;
+    margin-right: 6px;
     gap: 5px;
     border-radius: 15px;
     background-color: #e5e5e5;
 }
-
+.o-mm-text-c {
+    margin: 7px 0px;
+}
 /* 마이페이지 이미지 선택 모달 */
 /* 모달 스타일 */
 .modal {
@@ -672,7 +675,10 @@ margin-right: 6px;
     margin: 0px 20px;
     cursor: pointer;
 }
-
+/*.gallery-image:hover {
+    width:160px;  *//* 사진크기 조절 *//*
+    transform:scale(1.1, 1.1);  *//* 가로2배 새로 1.5배 로 커짐 *//*
+    transition: transform.5s;  *//* 커지는 시간 *//* }*/
 /* 선택 버튼 스타일 */
 #selectButton {
     display: block;
@@ -691,6 +697,10 @@ margin-right: 6px;
 
 /* 선택된 이미지 스타일 */
 #selectedImage img {
+    width: 120px;
+    height: 120px;
+}
+#selectedImage2 img {
     width: 150px;
     height: 150px;
 }

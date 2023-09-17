@@ -28,7 +28,7 @@ public class ReviewService {
     //    게시글을 불러올 메소드 생성
     public List<TalkTalkReviewEntity> reviewList(){
         log.info("리뷰서비스의 reviewList메서드 실행~ findAll()리턴~");
-        return talktalkRepository.findAll();
+        return talktalkRepository.findAllDesc();
     }
 
 

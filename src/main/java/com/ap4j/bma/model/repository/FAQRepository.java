@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface FAQRepository extends JpaRepository<FAQEntity, Integer> {
 
-    @Query("SELECT a FROM FAQEntity a WHERE a.category = ?1")
+    @Query("SELECT a FROM FAQEntity a WHERE a.category LIKE CONCAT('%', ?1, '%')")
     Page<FAQEntity> findByCategory(String category, Pageable pageable);
      Page<FAQEntity> findByTitleContainingIgnoreCaseOrContentContainingIgnoreCase(String titleKeyword, String contentKeyword, Pageable pageable);
 
